@@ -1,0 +1,248 @@
+[
+  {
+    "variant": "euclidean",
+    "metric": "euclidean",
+    "eps": 1.8209037572112985,
+    "clusters": 39,
+    "noise_rate": 0.4714,
+    "refined_clusters": 4,
+    "coverage_rule_known": 0.6748091603053435,
+    "agreement_when_predicted": 0.8212669683257918,
+    "agreement_rule_known_all": 0.5541984732824428,
+    "outer_agreement_when_predicted": 0.25,
+    "outer_agreement_all": 0.125,
+    "by_phase": {
+      "DEPARTURE": {
+        "coverage": 0.6106194690265486,
+        "agreement_when_predicted": 0.7246376811594203,
+        "agreement_all": 0.4424778761061947
+      },
+      "ENROUTE_CLIMB": {
+        "coverage": 0.7093023255813954,
+        "agreement_when_predicted": 0.894808743169399,
+        "agreement_all": 0.6346899224806202
+      },
+      "FINAL_ARRIVAL": {
+        "coverage": 0.7488038277511961,
+        "agreement_when_predicted": 0.9648562300319489,
+        "agreement_all": 0.722488038277512
+      },
+      "OUTER_ARRIVAL": {
+        "coverage": 0.5,
+        "agreement_when_predicted": 0.25,
+        "agreement_all": 0.125
+      },
+      "TERMINAL_ARRIVAL": {
+        "coverage": 0.6088235294117647,
+        "agreement_when_predicted": 0.644122383252818,
+        "agreement_all": 0.39215686274509803
+      }
+    },
+    "seconds": 0.92
+  },
+  {
+    "variant": "weighted_euclidean",
+    "metric": "euclidean",
+    "eps": 1.9890733224691781,
+    "clusters": 26,
+    "noise_rate": 0.4758,
+    "refined_clusters": 3,
+    "coverage_rule_known": 0.743206106870229,
+    "agreement_when_predicted": 0.9276910435497124,
+    "agreement_rule_known_all": 0.6894656488549619,
+    "outer_agreement_when_predicted": 0.5625,
+    "outer_agreement_all": 0.1875,
+    "by_phase": {
+      "DEPARTURE": {
+        "coverage": 0.6135693215339233,
+        "agreement_when_predicted": 0.7932692307692307,
+        "agreement_all": 0.48672566371681414
+      },
+      "ENROUTE_CLIMB": {
+        "coverage": 0.7858527131782945,
+        "agreement_when_predicted": 0.9839704069050554,
+        "agreement_all": 0.7732558139534884
+      },
+      "FINAL_ARRIVAL": {
+        "coverage": 0.8528708133971292,
+        "agreement_when_predicted": 0.9817671809256662,
+        "agreement_all": 0.8373205741626795
+      },
+      "OUTER_ARRIVAL": {
+        "coverage": 0.3333333333333333,
+        "agreement_when_predicted": 0.5625,
+        "agreement_all": 0.1875
+      },
+      "TERMINAL_ARRIVAL": {
+        "coverage": 0.6725490196078432,
+        "agreement_when_predicted": 0.8542274052478134,
+        "agreement_all": 0.5745098039215686
+      }
+    },
+    "seconds": 0.22
+  },
+  {
+    "variant": "manhattan",
+    "metric": "manhattan",
+    "eps": 7.410610292906053,
+    "clusters": 36,
+    "noise_rate": 0.4644,
+    "refined_clusters": 3,
+    "coverage_rule_known": 0.7346564885496183,
+    "agreement_when_predicted": 0.85785536159601,
+    "agreement_rule_known_all": 0.6302290076335878,
+    "outer_agreement_when_predicted": 0.35,
+    "outer_agreement_all": 0.14583333333333334,
+    "by_phase": {
+      "DEPARTURE": {
+        "coverage": 0.6342182890855457,
+        "agreement_when_predicted": 0.6744186046511628,
+        "agreement_all": 0.4277286135693215
+      },
+      "ENROUTE_CLIMB": {
+        "coverage": 0.7587209302325582,
+        "agreement_when_predicted": 0.8825031928480205,
+        "agreement_all": 0.6695736434108527
+      },
+      "FINAL_ARRIVAL": {
+        "coverage": 0.8409090909090909,
+        "agreement_when_predicted": 0.957325746799431,
+        "agreement_all": 0.8050239234449761
+      },
+      "OUTER_ARRIVAL": {
+        "coverage": 0.4166666666666667,
+        "agreement_when_predicted": 0.35,
+        "agreement_all": 0.14583333333333334
+      },
+      "TERMINAL_ARRIVAL": {
+        "coverage": 0.6715686274509803,
+        "agreement_when_predicted": 0.8,
+        "agreement_all": 0.5372549019607843
+      }
+    },
+    "seconds": 0.44
+  },
+  {
+    "variant": "weighted_manhattan",
+    "metric": "manhattan",
+    "eps": 11.51505340777918,
+    "clusters": 29,
+    "noise_rate": 0.4622,
+    "refined_clusters": 2,
+    "coverage_rule_known": 0.8192366412213741,
+    "agreement_when_predicted": 0.9288110324263884,
+    "agreement_rule_known_all": 0.7609160305343512,
+    "outer_agreement_when_predicted": 0.4375,
+    "outer_agreement_all": 0.14583333333333334,
+    "by_phase": {
+      "DEPARTURE": {
+        "coverage": 0.7876106194690266,
+        "agreement_when_predicted": 0.8801498127340824,
+        "agreement_all": 0.6932153392330384
+      },
+      "ENROUTE_CLIMB": {
+        "coverage": 0.6569767441860465,
+        "agreement_when_predicted": 0.9321533923303835,
+        "agreement_all": 0.6124031007751938
+      },
+      "FINAL_ARRIVAL": {
+        "coverage": 0.9784688995215312,
+        "agreement_when_predicted": 0.9559902200488998,
+        "agreement_all": 0.9354066985645934
+      },
+      "OUTER_ARRIVAL": {
+        "coverage": 0.3333333333333333,
+        "agreement_when_predicted": 0.4375,
+        "agreement_all": 0.14583333333333334
+      },
+      "TERMINAL_ARRIVAL": {
+        "coverage": 0.8862745098039215,
+        "agreement_when_predicted": 0.9247787610619469,
+        "agreement_all": 0.8196078431372549
+      }
+    },
+    "seconds": 0.42
+  },
+  {
+    "variant": "chebyshev",
+    "metric": "chebyshev",
+    "eps": 0.7496503661774886,
+    "clusters": 33,
+    "noise_rate": 0.4756,
+    "refined_clusters": 2,
+    "coverage_rule_known": 0.6552671755725191,
+    "agreement_when_predicted": 0.46272134203168686,
+    "agreement_rule_known_all": 0.30320610687022903,
+    "outer_agreement_when_predicted": 0.10344827586206896,
+    "outer_agreement_all": 0.0625,
+    "by_phase": {
+      "DEPARTURE": {
+        "coverage": 0.5368731563421829,
+        "agreement_when_predicted": 0.3131868131868132,
+        "agreement_all": 0.168141592920354
+      },
+      "ENROUTE_CLIMB": {
+        "coverage": 0.6937984496124031,
+        "agreement_when_predicted": 0.8715083798882681,
+        "agreement_all": 0.6046511627906976
+      },
+      "FINAL_ARRIVAL": {
+        "coverage": 0.7069377990430622,
+        "agreement_when_predicted": 0.2927241962774958,
+        "agreement_all": 0.2069377990430622
+      },
+      "OUTER_ARRIVAL": {
+        "coverage": 0.6041666666666666,
+        "agreement_when_predicted": 0.10344827586206896,
+        "agreement_all": 0.0625
+      },
+      "TERMINAL_ARRIVAL": {
+        "coverage": 0.615686274509804,
+        "agreement_when_predicted": 0.21656050955414013,
+        "agreement_all": 0.13333333333333333
+      }
+    },
+    "seconds": 1.04
+  },
+  {
+    "variant": "cosine",
+    "metric": "cosine",
+    "eps": 0.029910777948946903,
+    "clusters": 35,
+    "noise_rate": 0.4952,
+    "refined_clusters": 4,
+    "coverage_rule_known": 0.7355725190839695,
+    "agreement_when_predicted": 0.6081361560813615,
+    "agreement_rule_known_all": 0.44732824427480916,
+    "outer_agreement_when_predicted": 0.13636363636363635,
+    "outer_agreement_all": 0.125,
+    "by_phase": {
+      "DEPARTURE": {
+        "coverage": 0.8171091445427728,
+        "agreement_when_predicted": 0.3574007220216607,
+        "agreement_all": 0.2920353982300885
+      },
+      "ENROUTE_CLIMB": {
+        "coverage": 0.6918604651162791,
+        "agreement_when_predicted": 0.4957983193277311,
+        "agreement_all": 0.3430232558139535
+      },
+      "FINAL_ARRIVAL": {
+        "coverage": 0.861244019138756,
+        "agreement_when_predicted": 0.7041666666666667,
+        "agreement_all": 0.6064593301435407
+      },
+      "OUTER_ARRIVAL": {
+        "coverage": 0.9166666666666666,
+        "agreement_when_predicted": 0.13636363636363635,
+        "agreement_all": 0.125
+      },
+      "TERMINAL_ARRIVAL": {
+        "coverage": 0.6411764705882353,
+        "agreement_when_predicted": 0.7629969418960245,
+        "agreement_all": 0.4892156862745098
+      }
+    },
+    "seconds": 0.96
+  }
+]

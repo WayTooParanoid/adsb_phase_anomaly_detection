@@ -1,0 +1,15 @@
+feature,count,mean_abs_normalized_delta
+max_abs_vertical_rate_fpm,396,0.4536161616161609
+delta_altitude_ft,331,0.33139266532393385
+min_ground_speed_kt,328,0.4017124830623305
+mean_vertical_rate_fpm,326,0.3497231306291428
+max_ground_speed_kt,315,0.39609567901234566
+mean_ground_speed_kt,291,0.39068936181499603
+heading_change_deg,289,0.5162786290986985
+start_altitude_agl_ft,220,0.37405530303030315
+end_altitude_agl_ft,207,0.36638808373590975
+mean_altitude_agl_ft,201,0.3654592336747329
+delta_ground_speed_kt,183,0.39267152398299937
+segment_duration_s,18,0.3555277842592593
+turn_rate_deg_per_s,17,0.2662039224811634
+sinuosity,1,0.15157033535314768

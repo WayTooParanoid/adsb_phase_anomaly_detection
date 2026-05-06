@@ -1,0 +1,503 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Phase-Specific DBSCAN for ADS-B Flight Behavior Anomaly Detection</title>
+<style>body{font-family:Arial,Helvetica,sans-serif;line-height:1.55;margin:40px auto;max-width:980px;color:#172033}
+h1,h2,h3{line-height:1.2;color:#111827}h1{font-size:2rem;border-bottom:1px solid #d8dee9;padding-bottom:.4rem}
+h2{margin-top:2rem;border-bottom:1px solid #edf0f5;padding-bottom:.25rem}h3{margin-top:1.4rem}
+table{border-collapse:collapse;width:100%;margin:1rem 0;font-size:.95rem}th,td{border:1px solid #d8dee9;padding:.45rem .6rem;text-align:left}th{background:#f4f6f8}
+code{background:#eef2f7;padding:.08rem .25rem;border-radius:3px}pre code{display:block;padding:.75rem;overflow:auto}
+img{max-width:100%;height:auto;border:1px solid #e5e7eb}p img{display:block;margin:1rem 0}.toc{border:1px solid #e5e7eb;background:#f8fafc;padding:1rem}
+a{color:#0b5cad}@media print{body{max-width:none;margin:24px}h2,h3{break-after:avoid}table,img{break-inside:avoid}}</style>
+</head><body>
+<h1 id="phase-specific-dbscan-for-ads-b-flight-behavior-anomaly-detection">Phase-Specific DBSCAN for ADS-B Flight Behavior Anomaly Detection</h1>
+<p><strong>Author:</strong> [Your Name]<br />
+<strong>Course:</strong> [Course Name]<br />
+<strong>Instructor:</strong> [Instructor Name]<br />
+<strong>Date:</strong> April 29, 2026</p>
+<h2 id="abstract">Abstract</h2>
+<p>This project looks at a practical question: can ADS-B behavior near a major airport be modeled in a way that is useful without hand-labeled anomaly data? We focused on Hartsfield-Jackson Atlanta International Airport (ATL) and built a phase-aware unsupervised detector rather than one model for all traffic. The trained phases are <code>DEPARTURE</code>, <code>ENROUTE_CLIMB</code>, <code>INITIAL_APPROACH</code>, <code>INTERMEDIATE_APPROACH</code>, and <code>FINAL_APPROACH</code>. Segments outside those focused patterns are left as <code>UNKNOWN</code>.</p>
+<p>The system was trained from 428,212 trajectory segments extracted from processed ADS-B data for December 20-30, 2025 within 120 nautical miles of ATL. The phase labels used for training are weak labels from aviation-context rules, not manually reviewed truth. At runtime, the rule label is not treated as final. Each phase-specific DBSCAN model scores the segment, and the segment is assigned to the best-fitting physically plausible phase only when the fit is strong enough.</p>
+<p>The final implementation uses a custom DBSCAN variant rather than a direct call to vanilla DBSCAN. We added the parts needed for this use case: prediction from learned core samples, nearest-core anomaly scoring, feature-level contribution explanations, feature weighting, optional track-aware density constraints, and per-phase distance calibration. The calibration is especially useful because it turns a raw distance into a phase-relative percentile. Instead of only reporting a score such as 1.35, the dashboard can report that the segment is farther from normal than almost all training inliers for that same phase.</p>
+<p>The current model agreement evaluation shows that the best-fitting DBSCAN model matches the weak training phase for 94.9% of sampled known-phase segments. A 48,000-row model-first live-style evaluation produced a 24.2% unknown rate and a 2.17% behavior anomaly rate. These results demonstrate feasibility and internal consistency, but they do not prove real-world anomaly accuracy because no expert-labeled anomaly set was available.</p>
+<h2 id="1-introduction">1. Introduction</h2>
+<p>ADS-B messages provide aircraft position, altitude, speed, heading, and vertical-rate information. The data is rich, but it is not immediately comparable across all aircraft. The same speed or altitude change can mean different things depending on where the aircraft is and what phase of flight it appears to be in. A low, slow aircraft aligned with a runway can be completely normal on final approach. A similar pattern far from a plausible airport would be harder to explain. Likewise, a strong climb rate is expected after departure but would be unusual near final approach.</p>
+<p>That is why we did not use one global DBSCAN model. The central assumption is that "normal" should be defined within a flight phase. A departure segment should be compared to other departures, not to arrivals, cruise overflights, and low-level traffic at the same time. In this report, the word anomaly has a narrow meaning: a segment is anomalous when it does not fit the learned density structure for the phase model that best explains it.</p>
+<p>The project has three practical goals:</p>
+<ol>
+<li>Assign interpretable phases to live ADS-B segments.</li>
+<li>Detect phase-specific behavioral anomalies without requiring hand-labeled anomaly examples.</li>
+<li>Explain anomaly scores using the largest feature differences from the learned normal pattern.</li>
+</ol>
+<h2 id="2-data">2. Data</h2>
+<p>The primary data source is a set of processed ADS-B day files for December 20-30, 2025. After cleaning and segment building, the retained feature cache contains 428,212 trajectory segments within 120 nautical miles of ATL.</p>
+<table>
+<thead>
+<tr>
+<th>Phase</th>
+<th style="text-align: right;">Segments</th>
+<th style="text-align: right;">Share</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>UNKNOWN</code></td>
+<td style="text-align: right;">314,263</td>
+<td style="text-align: right;">73.39%</td>
+</tr>
+<tr>
+<td><code>INTERMEDIATE_APPROACH</code></td>
+<td style="text-align: right;">56,869</td>
+<td style="text-align: right;">13.28%</td>
+</tr>
+<tr>
+<td><code>ENROUTE_CLIMB</code></td>
+<td style="text-align: right;">26,371</td>
+<td style="text-align: right;">6.16%</td>
+</tr>
+<tr>
+<td><code>FINAL_APPROACH</code></td>
+<td style="text-align: right;">15,363</td>
+<td style="text-align: right;">3.59%</td>
+</tr>
+<tr>
+<td><code>DEPARTURE</code></td>
+<td style="text-align: right;">9,010</td>
+<td style="text-align: right;">2.10%</td>
+</tr>
+<tr>
+<td><code>INITIAL_APPROACH</code></td>
+<td style="text-align: right;">6,336</td>
+<td style="text-align: right;">1.48%</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td style="text-align: right;"><strong>428,212</strong></td>
+<td style="text-align: right;"><strong>100.00%</strong></td>
+</tr>
+</tbody>
+</table>
+<p>At first glance, the <code>UNKNOWN</code> count looks high. In this design, that is acceptable. The goal is not to assign every aircraft in the region to an ATL phase. The goal is to model a focused set of ATL arrival, departure, and climb behaviors. If a segment is an overflight, a partial track, or traffic that appears more related to another airport, forcing it into one of the ATL models would make the output look cleaner but less honest.</p>
+<p>Likely causes of <code>UNKNOWN</code> include:</p>
+<ul>
+<li>aircraft overflying the region without clear ATL arrival or departure intent,</li>
+<li>tracks that begin or end mid-flight and do not contain enough phase evidence,</li>
+<li>non-ATL operations near smaller airports inside the search radius,</li>
+<li>noisy or incomplete ADS-B fields such as missing vertical rate, speed, or heading,</li>
+<li>behavior that is valid aviation activity but outside the deliberately focused phase set.</li>
+</ul>
+<p>This conservative behavior is intentional. Without flight plans, ATC clearances, or expert labels, the model should be allowed to say "unknown." That decision makes the dashboard less complete, but it reduces the risk of overconfident phase assignments.</p>
+<p><img alt="Phase distribution" src="../report_assets/phase_distribution.png" /></p>
+<h2 id="3-feature-engineering">3. Feature Engineering</h2>
+<p>The raw ADS-B points are too noisy and too local to score one by one, so the track builder converts messages into short trajectory segments. Each segment describes recent behavior rather than a single aircraft state. The main feature groups are:</p>
+<table>
+<thead>
+<tr>
+<th>Feature group</th>
+<th>Examples</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kinematics</td>
+<td>ground speed, vertical rate, heading change, speed change</td>
+<td>Captures aircraft motion and maneuvering</td>
+</tr>
+<tr>
+<td>Altitude profile</td>
+<td>altitude AGL, altitude change, climb/descent trend</td>
+<td>Separates climb, approach, and low-altitude behavior</td>
+</tr>
+<tr>
+<td>Spatial context</td>
+<td>airport distance, airport-relative movement, runway alignment proxies</td>
+<td>Supports phase labeling, plausibility gates, and dashboard context</td>
+</tr>
+<tr>
+<td>Track quality</td>
+<td>segment duration, point count, recency</td>
+<td>Avoids unstable classifications from weak tracks</td>
+</tr>
+</tbody>
+</table>
+<p>For DBSCAN scoring, we kept the feature matrix aviation-behavior focused. Airport-relative fields are still important, but they are used for context, phase labeling, and plausibility checks rather than as direct DBSCAN inputs. The DBSCAN distance is based on behavior features such as altitude AGL, speed, vertical rate, heading change, turn rate, sinuosity, and duration. Those features are scaled by phase-specific tolerances so altitude, speed, and heading behavior can be compared in a single distance calculation.</p>
+<p><img alt="Altitude and speed by phase" src="../report_assets/altitude_speed_by_phase.png" /></p>
+<p><img alt="Feature profiles by phase" src="../report_assets/feature_profiles_by_phase.png" /></p>
+<h2 id="4-phase-labeling-strategy">4. Phase Labeling Strategy</h2>
+<p>The project uses aviation-context weak labels to organize the training data. These labels come from altitude, speed, vertical rate, airport distance, movement toward or away from the airport, and runway-alignment evidence. They are useful labels, but they are not the same thing as manually verified truth.</p>
+<p>The focused phase set is:</p>
+<table>
+<thead>
+<tr>
+<th>Phase</th>
+<th>Operational meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>DEPARTURE</code></td>
+<td>Low-altitude outbound traffic leaving ATL</td>
+</tr>
+<tr>
+<td><code>ENROUTE_CLIMB</code></td>
+<td>Continued climb after departure while still in the ATL operating region</td>
+</tr>
+<tr>
+<td><code>INITIAL_APPROACH</code></td>
+<td>Arrival traffic entering the ATL arrival environment</td>
+</tr>
+<tr>
+<td><code>INTERMEDIATE_APPROACH</code></td>
+<td>Arrival traffic closer to the terminal area and transitioning toward final alignment</td>
+</tr>
+<tr>
+<td><code>FINAL_APPROACH</code></td>
+<td>Low-altitude runway-aligned arrival traffic close to landing</td>
+</tr>
+<tr>
+<td><code>UNKNOWN</code></td>
+<td>Segment outside the focused ATL phase definitions or too ambiguous to assign</td>
+</tr>
+</tbody>
+</table>
+<p>The important design choice is the split between training and live scoring. Rules are used to create weak training partitions. In the live stream, however, the system lets all phase models score the segment and then chooses the best-fitting physically plausible model if the score and margin are acceptable. If no model fits well enough, the segment remains <code>UNKNOWN</code>.</p>
+<p>This separates two decisions:</p>
+<ol>
+<li><strong>Phase assignment:</strong> choose the best-fitting valid phase model if the fit is strong enough.</li>
+<li><strong>Anomaly detection:</strong> after assigning a phase, compare the segment to that phase model's learned density structure.</li>
+</ol>
+<p>A segment can therefore be assigned to the best phase model and still be flagged as unusual inside that phase.</p>
+<h2 id="5-custom-dbscan-model">5. Custom DBSCAN Model</h2>
+<p>DBSCAN fits the project because it does not need anomaly labels. It learns dense regions of behavior and treats points outside those regions as noise. That is a good match for ADS-B data: normal traffic is available in large volume, but reliable segment-level anomaly labels are not.</p>
+<p>The implementation uses a custom DBSCAN class. The algorithm still follows the DBSCAN idea of density-reachable clusters, but the plain version of DBSCAN was not enough for the dashboard and scoring workflow. The custom version adds:</p>
+<ul>
+<li>prediction from learned core samples for new live segments,</li>
+<li>nearest-core distance used as an anomaly score,</li>
+<li>feature-level contribution explanations for the nearest core comparison,</li>
+<li>feature weighting,</li>
+<li>optional minimum unique-track support so a cluster cannot be created only by repeated segments from one aircraft,</li>
+<li>per-phase empirical distance calibration.</li>
+</ul>
+<p>Each phase model is trained independently:</p>
+<table>
+<thead>
+<tr>
+<th>Phase</th>
+<th style="text-align: right;">Available segments</th>
+<th style="text-align: right;">Training sample</th>
+<th style="text-align: right;">Clusters</th>
+<th style="text-align: right;">Noise rate</th>
+<th style="text-align: right;">Selected eps</th>
+<th style="text-align: right;">p95 distance</th>
+<th style="text-align: right;">p99 distance</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>DEPARTURE</code></td>
+<td style="text-align: right;">9,010</td>
+<td style="text-align: right;">5,000</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">3.68%</td>
+<td style="text-align: right;">0.713</td>
+<td style="text-align: right;">0.432</td>
+<td style="text-align: right;">0.644</td>
+</tr>
+<tr>
+<td><code>ENROUTE_CLIMB</code></td>
+<td style="text-align: right;">26,371</td>
+<td style="text-align: right;">5,000</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">3.78%</td>
+<td style="text-align: right;">0.709</td>
+<td style="text-align: right;">0.473</td>
+<td style="text-align: right;">0.654</td>
+</tr>
+<tr>
+<td><code>FINAL_APPROACH</code></td>
+<td style="text-align: right;">15,363</td>
+<td style="text-align: right;">5,000</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">4.68%</td>
+<td style="text-align: right;">1.057</td>
+<td style="text-align: right;">0.558</td>
+<td style="text-align: right;">0.928</td>
+</tr>
+<tr>
+<td><code>INITIAL_APPROACH</code></td>
+<td style="text-align: right;">6,336</td>
+<td style="text-align: right;">5,000</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">5.20%</td>
+<td style="text-align: right;">0.621</td>
+<td style="text-align: right;">0.186</td>
+<td style="text-align: right;">0.559</td>
+</tr>
+<tr>
+<td><code>INTERMEDIATE_APPROACH</code></td>
+<td style="text-align: right;">56,869</td>
+<td style="text-align: right;">5,000</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">3.76%</td>
+<td style="text-align: right;">1.009</td>
+<td style="text-align: right;">0.566</td>
+<td style="text-align: right;">0.875</td>
+</tr>
+</tbody>
+</table>
+<p><img alt="Selected eps by phase" src="../report_assets/selected_eps_by_phase.png" /></p>
+<p><img alt="DBSCAN noise rates" src="../report_assets/dbscan_noise_rates.png" /></p>
+<p>The raw anomaly score is simple:</p>
+<pre><code class="language-text">nearest_core_distance / selected_eps
+</code></pre>
+<p>A score below 1.0 means the segment is inside the learned DBSCAN core boundary for that phase. A score above 1.0 means it is outside the learned boundary and is treated as behaviorally anomalous.</p>
+<p>The calibrated score adds context to that raw number. During training, the model stores the empirical nearest-core distance distribution for DBSCAN inliers in that phase. During scoring, the live segment's distance is converted into a phase-relative percentile. This lets the dashboard say that a segment is, for example, farther from normal than 97.5% or 99% of training inliers for the assigned phase. That is easier to interpret than a normalized distance by itself.</p>
+<h3 id="51-parameter-selection">5.1 Parameter Selection</h3>
+<p>The model parameters were chosen with a practical goal in mind: keep the model stable and explainable without pretending there is a supervised accuracy target. Since there are no expert anomaly labels, tuning only for a performance number would be misleading.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Selection method</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>eps</code></td>
+<td>Selected separately for each phase from the 90th percentile of k-nearest-neighbor distances, where <code>k</code> is the phase's <code>min_samples</code>; values are clamped by configured minimum and maximum bounds.</td>
+</tr>
+<tr>
+<td><code>min_samples</code></td>
+<td>Set by phase to require enough nearby behavior samples before a dense region is accepted.</td>
+</tr>
+<tr>
+<td><code>min_unique_tracks</code></td>
+<td>Chosen from aviation reasoning to reduce artificial density from overlapping segments of the same aircraft track.</td>
+</tr>
+<tr>
+<td>Feature weights</td>
+<td>Chosen by phase from aviation reasoning; climb/descent features receive higher weight where vertical motion is operationally important.</td>
+</tr>
+<tr>
+<td>Raw anomaly cutoff</td>
+<td>The DBSCAN core boundary is score <code>1.0</code>; scores above this are outside the learned core region.</td>
+</tr>
+<tr>
+<td>Calibrated severity</td>
+<td>Outlier severity is interpreted using each phase's empirical nearest-core distance distribution.</td>
+</tr>
+</tbody>
+</table>
+<p>The 5,000-row training cap per phase was a practical compromise. The custom DBSCAN implementation performs direct neighbor comparisons, so training time grows quickly as the sample size increases. Five thousand rows per phase kept training manageable while still giving each model a substantial sample. The downside is that larger phases, especially <code>INTERMEDIATE_APPROACH</code>, may lose some density detail from downsampling. We report both available and clean training segment counts so that this choice is visible.</p>
+<h2 id="6-runtime-scoring-and-dashboard">6. Runtime Scoring and Dashboard</h2>
+<p>The live dashboard is the main way to inspect the model. It polls ADS-B data, builds recent track segments, scores each segment against every phase-specific DBSCAN model, and displays:</p>
+<ul>
+<li>assigned phase,</li>
+<li>behavior anomaly status,</li>
+<li>raw DBSCAN score,</li>
+<li>phase-relative distance percentile,</li>
+<li>confidence and nearest-cluster information,</li>
+<li>top alternate phase-model scores,</li>
+<li>nearest airports and adjustable airport marker radius,</li>
+<li>selected aircraft trail and replay controls.</li>
+</ul>
+<p>The phase shown in the aircraft popup is the model-first assigned phase. The weak rule label is not the runtime authority. This matters because live traffic can include aircraft near ATL, near another airport, transiting the region, or only partially observed. In those cases, forcing a rule phase before scoring made the system harder to trust. Letting the models compete produced a cleaner runtime behavior.</p>
+<p>The dashboard explanation combines three pieces of evidence:</p>
+<ol>
+<li>Whether the segment is outside the assigned phase model's DBSCAN core.</li>
+<li>How extreme the distance is relative to that phase's calibrated training distribution.</li>
+<li>Which behavior features differ most from the nearest learned core pattern.</li>
+</ol>
+<h2 id="7-evaluation">7. Evaluation</h2>
+<h3 id="71-phase-assignment-agreement">7.1 Phase Assignment Agreement</h3>
+<p>Because the project does not have hand-reviewed segment-level phase labels, the main phase sanity check compares the weak training phase with the phase of the best-fitting DBSCAN model. This is not a true accuracy test. It is a check on whether the weak training partitions make sense to the models trained from them.</p>
+<p>In the current sampled evaluation, known-phase agreement is 94.9%. Including <code>UNKNOWN</code> rows, agreement is lower because <code>UNKNOWN</code> is intentionally not a trained operational phase.</p>
+<p><img alt="Training phase versus best-fitting model" src="../report_assets/best_model_vs_phase_assignment.png" /></p>
+<table>
+<thead>
+<tr>
+<th>Assigned phase</th>
+<th style="text-align: right;">Best model match</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>DEPARTURE</code></td>
+<td style="text-align: right;">100.00%</td>
+</tr>
+<tr>
+<td><code>ENROUTE_CLIMB</code></td>
+<td style="text-align: right;">100.00%</td>
+</tr>
+<tr>
+<td><code>INITIAL_APPROACH</code></td>
+<td style="text-align: right;">98.60%</td>
+</tr>
+<tr>
+<td><code>INTERMEDIATE_APPROACH</code></td>
+<td style="text-align: right;">95.35%</td>
+</tr>
+<tr>
+<td><code>FINAL_APPROACH</code></td>
+<td style="text-align: right;">73.01%</td>
+</tr>
+</tbody>
+</table>
+<p>The weakest agreement is <code>FINAL_APPROACH</code>, where many sampled final segments fit the intermediate-approach model best. We do not view this as a failure of the whole approach. It is a useful diagnostic. Aircraft do not jump cleanly from intermediate approach to final approach; they transition continuously. This is also the phase where runway alignment and low-altitude assumptions matter most. Better distance-to-runway-threshold features, runway-specific alignment checks, and temporal smoothing across consecutive segments would likely reduce this ambiguity.</p>
+<h3 id="72-model-first-live-style-evaluation">7.2 Model-First Live-Style Evaluation</h3>
+<p>A separate model-first evaluation sampled 48,000 segments and applied the same assignment logic used by the live scorer. This was meant to approximate how the system behaves in the dashboard, not to create a supervised benchmark. The loaded models were <code>DEPARTURE</code>, <code>ENROUTE_CLIMB</code>, <code>FINAL_APPROACH</code>, <code>INITIAL_APPROACH</code>, and <code>INTERMEDIATE_APPROACH</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th style="text-align: right;">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sample rows</td>
+<td style="text-align: right;">48,000</td>
+</tr>
+<tr>
+<td>Model-first unknown rate</td>
+<td style="text-align: right;">24.2%</td>
+</tr>
+<tr>
+<td>Behavior anomaly rate</td>
+<td style="text-align: right;">2.17%</td>
+</tr>
+<tr>
+<td>Combined anomaly rate</td>
+<td style="text-align: right;">2.19%</td>
+</tr>
+<tr>
+<td>Assignment/best-model consistency</td>
+<td style="text-align: right;">89.1%</td>
+</tr>
+<tr>
+<td>Median raw anomaly score</td>
+<td style="text-align: right;">0.269</td>
+</tr>
+<tr>
+<td>95th percentile raw anomaly score</td>
+<td style="text-align: right;">0.840</td>
+</tr>
+</tbody>
+</table>
+<p><img alt="Model-first assignment consistency" src="../artifacts/model_first_eval/model_first_assignment_consistency_heatmap.png" /></p>
+<p>The model-first unknown rate is expected because the system refuses assignment when no focused ATL phase model fits strongly enough. Unknowns include overflights, partial tracks, ambiguous airport intent, and aircraft that are outside the trained operational patterns. This makes the output less complete, but it is a better failure mode than assigning a confident-looking but poorly supported phase.</p>
+<p><img alt="Model-first anomaly rates" src="../artifacts/model_first_eval/model_first_anomaly_rates.png" /></p>
+<p><img alt="Model-first score distribution" src="../artifacts/model_first_eval/model_first_score_distribution.png" /></p>
+<h3 id="73-what-the-evaluation-proves-and-does-not-prove">7.3 What the Evaluation Proves and Does Not Prove</h3>
+<p>The evaluation supports three limited claims:</p>
+<ol>
+<li>The weakly labeled training partitions are mostly coherent for known phases.</li>
+<li>The model-first scorer behaves conservatively by leaving many ambiguous rows as <code>UNKNOWN</code>.</li>
+<li>The anomaly detector produces a low alert rate on ordinary traffic and provides interpretable feature-level reasons.</li>
+</ol>
+<p>The evaluation does not prove true aircraft intent accuracy. The 94.9% agreement value measures consistency between weak phase labels and best-fitting DBSCAN models, not agreement with expert-labeled truth. The 2.17% behavior anomaly rate also does not prove that those rows are true operational anomalies. It only means those segments fell outside the learned phase-specific DBSCAN core. External validation with labeled events or expert review would be required to measure true anomaly precision and recall.</p>
+<p>The model-first evaluation samples from the same overall processed period used to build the feature cache and train the models. It is therefore an internal consistency check, not a fully independent temporal holdout. The current report does not claim track-separated or day-separated external validation. A stronger experiment would train on December 20-27 and evaluate on December 28-30, with track IDs kept separated across training and evaluation.</p>
+<h3 id="74-anomaly-interpretation">7.4 Anomaly Interpretation</h3>
+<p>The anomaly model is not designed to produce many alerts under ordinary traffic. A low alert rate is expected when scoring regular ADS-B data, because the DBSCAN models were trained on normal operating patterns and the behavior anomaly threshold is tied to each phase model's learned core boundary. In other words, the goal is not to make the map look dramatic; it is to flag segments that are meaningfully outside the learned phase pattern.</p>
+<p>The most useful anomaly output is not only the binary alert. It is the explanation. The current system reports:</p>
+<ul>
+<li>the assigned phase model,</li>
+<li>the raw nearest-core score,</li>
+<li>the calibrated phase-relative percentile,</li>
+<li>the largest feature-level differences from the nearest learned core sample.</li>
+</ul>
+<p><img alt="Top anomaly features" src="../artifacts/model_first_eval/model_first_top_anomaly_features.png" /></p>
+<p>This makes alerts easier to inspect than a generic "outside cluster" message. A final-approach alert can be described as outside the learned final-approach pattern, farther than a high percentage of final-approach training inliers, with the main differences coming from specific features such as speed, descent rate, heading change, or path curvature.</p>
+<p>Example scored anomalies from the model-first sample are shown below. These are qualitative examples of model behavior, not confirmed safety events.</p>
+<table>
+<thead>
+<tr>
+<th>Phase</th>
+<th style="text-align: right;">Raw score</th>
+<th style="text-align: right;">Percentile</th>
+<th>Top feature differences</th>
+<th>Interpretation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ENROUTE_CLIMB</code></td>
+<td style="text-align: right;">1.35</td>
+<td style="text-align: right;">p100.0</td>
+<td>altitude change high; end altitude high</td>
+<td>Unusual for enroute climb; nearest-core distance exceeds the learned phase boundary.</td>
+</tr>
+<tr>
+<td><code>DEPARTURE</code></td>
+<td style="text-align: right;">1.35</td>
+<td style="text-align: right;">p100.0</td>
+<td>maximum speed low; average speed low</td>
+<td>Unusual for departure; nearest-core distance exceeds the learned phase boundary.</td>
+</tr>
+<tr>
+<td><code>INITIAL_APPROACH</code></td>
+<td style="text-align: right;">1.35</td>
+<td style="text-align: right;">p100.0</td>
+<td>vertical rate high; altitude change high</td>
+<td>Unusual for initial approach; nearest-core distance exceeds the learned phase boundary.</td>
+</tr>
+<tr>
+<td><code>INTERMEDIATE_APPROACH</code></td>
+<td style="text-align: right;">1.35</td>
+<td style="text-align: right;">p100.0</td>
+<td>altitude change low; vertical rate low</td>
+<td>Unusual for intermediate approach; nearest-core distance exceeds the learned phase boundary.</td>
+</tr>
+<tr>
+<td><code>DEPARTURE</code></td>
+<td style="text-align: right;">1.34</td>
+<td style="text-align: right;">p100.0</td>
+<td>heading change high; turn rate high</td>
+<td>Unusual for departure; nearest-core distance exceeds the learned phase boundary.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="8-discussion">8. Discussion</h2>
+<p>The biggest improvement over earlier versions was not adding more rules. It was removing unnecessary decision layers. Earlier versions mixed rule labels, learned thresholds, airport context, and DBSCAN scoring in ways that made live behavior hard to reason about. The final design is simpler:</p>
+<ol>
+<li>Use aviation-context rules only to create weak training partitions.</li>
+<li>Train one custom DBSCAN model per focused phase.</li>
+<li>At runtime, let all phase models score the current segment.</li>
+<li>Assign the best-fitting valid model when the score and margin are acceptable.</li>
+<li>Flag behavior anomalies using the assigned model's DBSCAN core boundary.</li>
+<li>Calibrate anomaly severity with the assigned phase's empirical nearest-core distance distribution.</li>
+</ol>
+<p>This structure better matches the research problem. It does not require manual review, and it avoids pretending that weak rules are ground truth. The rules are aviation-context heuristics used for weak supervision. The evaluation is therefore about model consistency, anomaly response, and interpretability rather than supervised accuracy.</p>
+<p>The train/test supervised phase-classification result is not the primary performance claim for this project. A random split against weak labels mostly measures agreement with heuristic labels, not true phase accuracy. It also penalizes reasonable model-first choices when weak labels are ambiguous. For that reason, this report uses training-phase versus best-model agreement and model-first live-style evaluation as the main phase performance evidence.</p>
+<h2 id="9-limitations">9. Limitations</h2>
+<p>The current system has several limitations:</p>
+<ul>
+<li>Phase labels are weak labels derived from aviation context, not manually reviewed truth.</li>
+<li>The focused phase set does not cover all possible traffic patterns near ATL.</li>
+<li><code>UNKNOWN</code> is intentionally broad and includes overflights, partial tracks, ambiguous tracks, and non-ATL operations.</li>
+<li>Runway alignment and airport intent are inferred from ADS-B geometry rather than flight plans or ATC clearances.</li>
+<li>Per-phase calibration improves score interpretation, but it is still empirical and depends on the representativeness of the training days.</li>
+<li>The custom DBSCAN implementation uses direct neighbor comparisons, which is acceptable for this class-scale project but would need acceleration for much larger training sets.</li>
+<li>The current evaluation is not a temporal holdout and is not track-separated external validation.</li>
+</ul>
+<p>These limitations define the correct interpretation. The model is a phase-aware unsupervised behavior detector, not a certified aircraft intent classifier.</p>
+<h2 id="10-future-work">10. Future Work</h2>
+<p>The most useful next improvements are:</p>
+<ol>
+<li>Add multi-airport model context so nearby-airport traffic can be evaluated against the correct airport geometry.</li>
+<li>Separate ATL-bound, ATL-departing, and overflight traffic using route or intent signals when available.</li>
+<li>Add temporal smoothing so phase assignment cannot flicker between adjacent approach phases on consecutive polls.</li>
+<li>Add a temporal holdout experiment, such as training on December 20-27 and evaluating on December 28-30.</li>
+<li>Evaluate against reliable aviation event datasets if segment-level labels become available.</li>
+<li>Add spatial indexing or approximate nearest-neighbor search to speed up custom DBSCAN training for larger datasets.</li>
+</ol>
+<h2 id="11-conclusion">11. Conclusion</h2>
+<p>The final project is best described as a phase-aware, interpretable unsupervised ADS-B behavior detector for traffic near ATL. It uses aviation-context weak labels to train separate custom DBSCAN phase models, then uses model-first scoring for live assignment and anomaly detection. The sampled known-phase agreement of 94.9% between weak training phase and best-fitting model suggests that the focused training partitions are mostly coherent, with the main ambiguity occurring between final and intermediate approach.</p>
+<p>The strongest contribution is interpretability. The system does not only say that a segment is outside a cluster. It identifies the assigned operational phase, reports raw DBSCAN distance, calibrates that distance against the phase's own training distribution, and lists the behavior features responsible for the difference. That makes the output more useful than comparing all aircraft against one global traffic model. External validation with expert-labeled anomalies or known aviation events is still needed before claiming true anomaly-detection accuracy.</p>
+<h2 id="references">References</h2>
+<p>Ester, M., Kriegel, H.-P., Sander, J., and Xu, X. (1996). A density-based algorithm for discovering clusters in large spatial databases with noise. <em>Proceedings of the Second International Conference on Knowledge Discovery and Data Mining</em>.</p>
+<p>Federal Aviation Administration. ADS-B and NextGen surveillance background. https://www.faa.gov/air_traffic/technology/adsb</p>
+<p>OpenSky Network. ADS-B data and aircraft state vector documentation. https://opensky-network.org</p>
+<p>OurAirports. Airport reference data. https://ourairports.com/data/</p>
+<p>scikit-learn documentation. DBSCAN clustering. https://scikit-learn.org/stable/modules/generated/sklearn.cluster.DBSCAN.html</p>
+</body></html>

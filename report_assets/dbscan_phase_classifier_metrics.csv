@@ -1,0 +1,2 @@
+sample_rows,rule_known_rows,rule_unknown_rows,dbscan_predicted_rows,dbscan_unknown_rows,dbscan_coverage_all,dbscan_coverage_rule_known,agreement_all_rows,agreement_rule_known_all,agreement_when_dbscan_predicts_and_rule_known,mean_confidence_predicted,median_confidence_predicted
+50000,8093,41907,22020,27980,0.4404,0.7424935129123934,0.61104,0.5753119980229828,0.7748377433849226,0.952222167145351,1.0

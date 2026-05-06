@@ -1,0 +1,25 @@
+{
+  "generated": [
+    "report_assets\\phase_distribution.png",
+    "report_assets\\daily_segments.png",
+    "report_assets\\daily_phase_heatmap.png",
+    "report_assets\\model_fit_coverage.png",
+    "report_assets\\dbscan_noise_rates.png",
+    "report_assets\\dbscan_cluster_counts.png",
+    "report_assets\\selected_eps_by_phase.png",
+    "report_assets\\context_anomaly_rates.png",
+    "report_assets\\phase_confidence_distribution.png",
+    "report_assets\\altitude_speed_by_phase.png",
+    "report_assets\\feature_profiles_by_phase.png",
+    "report_assets\\airport_context_distribution.png",
+    "report_assets\\best_model_vs_phase_assignment.png",
+    "report_assets\\evaluation_performance_metrics.png"
+  ],
+  "inputs": {
+    "segments": "artifacts\\training_cache\\atl_segments.csv.gz",
+    "cluster_summary": "artifacts\\outputs\\cluster_summary.csv",
+    "models_dir": "artifacts\\models",
+    "config": "config.real.yaml",
+    "sample_per_phase": 500
+  }
+}

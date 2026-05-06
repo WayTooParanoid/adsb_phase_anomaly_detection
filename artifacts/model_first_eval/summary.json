@@ -1,0 +1,35 @@
+{
+  "segments": "artifacts\\training_cache\\atl_segments.csv.gz",
+  "models_dir": "artifacts\\models",
+  "config": "config.real.yaml",
+  "sample_rows": 48000,
+  "models_loaded": [
+    "DEPARTURE",
+    "ENROUTE_CLIMB",
+    "FINAL_APPROACH",
+    "INITIAL_APPROACH",
+    "INTERMEDIATE_APPROACH"
+  ],
+  "assigned_phase_counts": {
+    "INTERMEDIATE_APPROACH": 14524,
+    "UNKNOWN": 11596,
+    "DEPARTURE": 7786,
+    "ENROUTE_CLIMB": 7240,
+    "INITIAL_APPROACH": 3497,
+    "FINAL_APPROACH": 3357
+  },
+  "unknown_rate": 0.24158333333333334,
+  "behavior_anomaly_rate": 0.0216875,
+  "combined_anomaly_rate": 0.021875,
+  "assignment_best_model_consistency": 0.8907702848194187,
+  "median_anomaly_score": 0.2688837629561779,
+  "p95_anomaly_score": 0.8402694708212187,
+  "generated": [
+    "artifacts\\model_first_eval\\model_first_phase_counts.png",
+    "artifacts\\model_first_eval\\model_first_anomaly_rates.png",
+    "artifacts\\model_first_eval\\model_first_score_distribution.png",
+    "artifacts\\model_first_eval\\model_first_severity_counts.png",
+    "artifacts\\model_first_eval\\model_first_assignment_consistency_heatmap.png",
+    "artifacts\\model_first_eval\\model_first_top_anomaly_features.png"
+  ]
+}

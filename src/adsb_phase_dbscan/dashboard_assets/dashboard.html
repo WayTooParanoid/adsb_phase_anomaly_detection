@@ -1,0 +1,982 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{title}</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <style>
+    html, body {{ height: 100%; margin: 0; font-family: Inter, Segoe UI, Arial, sans-serif; color: #111827; font-size: 15px; }}
+    body {{ --sidebar-width: clamp(430px, 27vw, 520px); }}
+    #app {{ display: grid; grid-template-columns: minmax(0, 1fr) 8px var(--sidebar-width); height: 100%; background: #f8fafc; }}
+    #mapWrap {{ position: relative; min-width: 0; min-height: 0; }}
+    #map {{ height: 100%; width: 100%; }}
+    #splitter {{ background: #e5e7eb; border-left: 1px solid #d1d5db; border-right: 1px solid #d1d5db; cursor: col-resize; }}
+    #splitter:hover, body.resizing #splitter {{ background: #cbd5e1; }}
+    aside {{ border-left: 1px solid #d1d5db; background: #ffffff; display: flex; flex-direction: column; min-width: 0; min-height: 0; }}
+    header {{ padding: 16px 18px; border-bottom: 1px solid #e5e7eb; flex: 0 0 auto; }}
+    h1 {{ font-size: 20px; line-height: 1.18; margin: 0 0 10px; font-weight: 700; }}
+    .status {{ font-size: 13px; color: #4b5563; display: grid; gap: 4px; }}
+    .map-control-button {{ position: absolute; top: 14px; right: 14px; z-index: 900; background: #ffffff; border: 1px solid #94a3b8; box-shadow: 0 6px 20px rgba(15,23,42,.18); font-weight: 700; }}
+    .control-popover {{ position: absolute; top: 58px; right: 14px; z-index: 900; width: min(430px, calc(100% - 28px)); max-height: calc(100% - 76px); overflow: auto; border: 1px solid #cbd5e1; border-radius: 8px; background: #ffffff; box-shadow: 0 18px 45px rgba(15,23,42,.24); display: none; }}
+    .control-popover.open {{ display: block; }}
+    .control-popover-head {{ padding: 12px 16px; display: flex; justify-content: space-between; gap: 12px; align-items: center; border-bottom: 1px solid #e5e7eb; }}
+    .control-popover-title {{ font-size: 14px; font-weight: 800; color: #334155; text-transform: uppercase; letter-spacing: .04em; }}
+    .control-panel {{ background: #fff; }}
+    .control-popover .control-grid {{ grid-template-columns: 1fr; }}
+    .legend {{ padding: 10px 18px 14px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px 12px; font-size: 13px; border-bottom: 1px solid #e5e7eb; }}
+    .legend span {{ display: inline-flex; align-items: center; gap: 7px; white-space: nowrap; }}
+    .swatch {{ width: 14px; height: 14px; border-radius: 50%; border: 1px solid rgba(15,23,42,.38); flex: 0 0 14px; box-sizing: border-box; }}
+    .swatch.anomaly-edge {{ background: transparent !important; border: 3px solid #facc15; }}
+    .swatch.anomaly-medium {{ border-radius: 2px; transform: rotate(45deg) scale(.82); border-color: rgba(0,0,0,.25); }}
+    .swatch.anomaly-high {{ border-radius: 2px; border: 2px solid #111827; }}
+    .controls {{ padding: 12px 18px 16px; display: grid; gap: 14px; font-size: 14px; }}
+    .control-section {{ display: grid; gap: 10px; }}
+    .section-title {{ font-size: 12px; font-weight: 700; color: #475569; text-transform: uppercase; letter-spacing: .04em; }}
+    .control-row {{ display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }}
+    .control-grid {{ display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 12px; }}
+    .check-grid {{ display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px 12px; }}
+    .controls label, .filters label {{ display: inline-flex; align-items: center; gap: 7px; min-width: 0; }}
+    .controls input[type="number"] {{ width: 72px; }}
+    .controls input[type="time"] {{ width: 100px; }}
+    .controls select {{ max-width: 100%; min-width: 0; }}
+    input, select, button {{ font: inherit; }}
+    input[type="checkbox"] {{ width: 16px; height: 16px; }}
+    input[type="range"] {{ min-width: 0; flex: 1 1 150px; max-width: 100%; }}
+    button {{ border: 1px solid #cbd5e1; background: #f8fafc; border-radius: 6px; padding: 7px 12px; cursor: pointer; font: inherit; min-height: 34px; }}
+    button.active {{ border-color: #2563eb; background: #eff6ff; color: #1d4ed8; }}
+    .filters {{ display: grid; grid-template-columns: 1fr 1fr; gap: 8px 12px; }}
+    .panel-title {{ padding: 11px 18px 7px; font-size: 13px; font-weight: 700; color: #374151; text-transform: uppercase; letter-spacing: .04em; }}
+    #alerts {{ padding: 0 10px 10px; display: grid; gap: 10px; flex: 1; min-height: 0; overflow: auto; align-content: start; }}
+    .row {{ border: 1px solid #e5e7eb; border-radius: 7px; padding: 11px; background: #fff; cursor: pointer; }}
+    .row.anomaly-high {{ border-color: #7f1d1d; background: #fee2e2; }}
+    .row.anomaly-medium {{ border-color: #ef4444; background: #fef2f2; }}
+    .row.anomaly-edge {{ border-color: #facc15; background: #fefce8; }}
+    .row.watch {{ border-color: #f59e0b; background: #fffbeb; }}
+    .row.edge {{ border-color: #f59e0b; background: #fff7ed; }}
+    .row.selected {{ border-color: #2563eb; box-shadow: 0 0 0 1px #2563eb inset; }}
+    .empty {{ padding: 10px; color: #6b7280; font-size: 13px; }}
+    .row-top {{ display: flex; justify-content: space-between; gap: 10px; align-items: baseline; }}
+    .hex {{ font-weight: 700; font-size: 14px; }}
+    .flight {{ font-size: 13px; color: #4b5563; }}
+    .pill {{ border-radius: 999px; padding: 3px 8px; color: white; font-size: 12px; line-height: 1.4; font-weight: 700; }}
+    .severity-pill {{ border-radius: 999px; padding: 3px 8px; color: #111827; background: #e5e7eb; font-size: 12px; line-height: 1.4; white-space: nowrap; }}
+    .severity-normal {{ background: #dcfce7; color: #166534; }}
+    .severity-edge {{ background: #fef3c7; color: #92400e; }}
+    .severity-unusual {{ background: #ffedd5; color: #9a3412; }}
+    .severity-outlier {{ background: #fee2e2; color: #991b1b; }}
+    .severity-no-model, .severity-no-core {{ background: #e5e7eb; color: #374151; }}
+    .metrics {{ margin-top: 8px; display: grid; grid-template-columns: 1fr 1fr; gap: 5px 12px; font-size: 13px; color: #374151; }}
+    .metric-wide {{ grid-column: 1 / -1; }}
+    .reason-line {{ margin-top: 8px; padding-top: 8px; border-top: 1px solid #e5e7eb; font-size: 13px; line-height: 1.38; color: #334155; }}
+    .row.anomaly-high .reason-line {{ border-top-color: #fecaca; color: #7f1d1d; }}
+    .row.anomaly-medium .reason-line {{ border-top-color: #fecaca; color: #991b1b; }}
+    .row.anomaly-edge .reason-line {{ border-top-color: #fde68a; color: #854d0e; }}
+    .row.watch .reason-line {{ border-top-color: #fde68a; color: #92400e; }}
+    .row.edge .reason-line {{ border-top-color: #fed7aa; color: #9a3412; }}
+    .muted {{ color: #6b7280; }}
+    .leaflet-popup-content {{ font-size: 14px; line-height: 1.45; }}
+    .airport-marker {{ pointer-events: auto; }}
+    .airport-pin {{ display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; color: #ffffff; background: #111827; border: 3px solid #facc15; box-shadow: 0 2px 10px rgba(0,0,0,.45); font-size: 17px; line-height: 1; }}
+    .airport-pin.secondary {{ width: 26px; height: 26px; font-size: 13px; border-color: #38bdf8; background: #334155; }}
+    .airport-label {{ position: absolute; left: 50%; top: 34px; transform: translateX(-50%); background: rgba(17,24,39,.92); color: #fff; border-radius: 4px; padding: 3px 6px; font-size: 12px; font-weight: 700; white-space: nowrap; box-shadow: 0 1px 4px rgba(0,0,0,.35); }}
+    @media (max-width: 1500px) {{
+      html, body {{ font-size: 16px; }}
+      body {{ --sidebar-width: 460px; }}
+      h1 {{ font-size: 21px; }}
+      .status {{ font-size: 14px; }}
+      .controls {{ font-size: 15px; }}
+      .legend, .metrics, .reason-line, .panel-title, .empty {{ font-size: 14px; }}
+      .hex {{ font-size: 15px; }}
+      .flight {{ font-size: 14px; }}
+    }}
+    @media (max-width: 900px) {{
+      #app {{ grid-template-columns: 1fr; grid-template-rows: 58% 6px 42%; }}
+      #splitter {{ cursor: row-resize; border-left: 0; border-right: 0; border-top: 1px solid #d1d5db; border-bottom: 1px solid #d1d5db; }}
+      aside {{ border-left: 0; border-top: 1px solid #d1d5db; }}
+      .control-popover {{ left: 14px; right: 14px; width: auto; }}
+      .control-grid, .check-grid, .legend, .filters {{ grid-template-columns: 1fr; }}
+    }}
+  </style>
+</head>
+<body>
+  <div id="app">
+    <div id="mapWrap">
+      <div id="map"></div>
+      <button id="controlsToggle" class="map-control-button" type="button">Controls</button>
+      <div id="controlPopover" class="control-popover">
+        <div class="control-popover-head">
+          <div class="control-popover-title">Dashboard Controls</div>
+          <button id="controlsClose" type="button">Close</button>
+        </div>
+        <div class="control-panel">
+          <div class="controls">
+            <div class="control-section">
+              <div class="section-title">Playback</div>
+              <div class="control-row">
+                <label>Mode
+                  <select id="modeSelect">
+                    <option value="live">Live</option>
+                    <option value="replay">Replay</option>
+                  </select>
+                </label>
+                <button id="pauseToggle" type="button">Pause</button>
+                <button id="resetReplay" type="button">Reset replay</button>
+              </div>
+              <div class="control-grid">
+                <label>Poll <input id="pollSeconds" type="number" min="1" max="60" step="1" value="2"> s</label>
+                <label>Replay step <input id="replayStepSeconds" type="number" min="1" max="3600" step="1" value="15"> s</label>
+                <label>Replay speed <input id="replaySpeed" type="number" min="1" max="200" step="1" value="1"> x</label>
+                <label>Replay time <input id="replayTime" type="time"></label>
+              </div>
+              <label>Replay day <select id="replayDay"><option value="">Loading...</option></select></label>
+            </div>
+            <div class="control-section">
+              <div class="section-title">Map</div>
+              <div class="check-grid">
+                <label><input id="showTrails" type="checkbox" checked> Selected trail</label>
+                <label><input id="showAllTrails" type="checkbox"> All trails</label>
+                <label><input id="followAlerts" type="checkbox"> Follow alerts</label>
+                <label><input id="showAirportRadius" type="checkbox" checked> Radius ring</label>
+                <label><input id="showAirportMarkerRings" type="checkbox" checked> Airport rings</label>
+              </div>
+              <label>Color by
+                <select id="colorMode">
+                  <option value="phase">Phase</option>
+                </select>
+              </label>
+              <div class="control-grid">
+                <label>Radius <input id="radiusNm" type="range" min="5" max="150" step="5" value="50"> <span id="radiusValue">50</span> nm</label>
+                <label>Airports <input id="airportTopK" type="range" min="0" max="40" step="1" value="12"> <span id="airportTopKValue">12</span></label>
+              </div>
+            </div>
+            <div class="control-section">
+              <div class="section-title">Alerts</div>
+              <div class="control-grid">
+                <label>Min streak <input id="alertMinSegments" type="number" min="1" max="10" step="1" value="5"></label>
+                <label>Alert threshold <input id="alertRatio" type="number" min="0" max="1" step="0.05" value="0.3"></label>
+              </div>
+            </div>
+            <div class="control-section">
+              <div class="section-title">Filters</div>
+              <div class="filters" id="filters"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="splitter" title="Drag to resize sidebar"></div>
+    <aside>
+      <header>
+        <h1>{title}</h1>
+        <div class="status">
+          <div>Last poll: <span id="lastPoll">waiting</span></div>
+          <div>Poll interval: <span id="pollInterval">2</span>s | Poll count: <span id="pollCount">0</span></div>
+          <div>Radius: <span id="radiusStatus">50</span> nm | Airports: <span id="airportCount">0</span></div>
+          <div>Aircraft: <span id="count">0</span> | Models: <span id="models">none</span></div>
+          <div id="error" class="muted"></div>
+        </div>
+      </header>
+      <div class="panel-title">Legend</div>
+      <div class="legend" id="legend"></div>
+      <div class="panel-title">Top 10 Anomaly Scores</div>
+      <div id="alerts"><div class="empty">Waiting for aircraft</div></div>
+    </aside>
+  </div>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    const map = L.map('map').setView([{lat}, {lon}], 8);
+    L.tileLayer('https://{{s}}.tile.openstreetmap.org/{{z}}/{{x}}/{{y}}.png', {{
+      maxZoom: 12,
+      attribution: '&copy; OpenStreetMap contributors'
+    }}).addTo(map);
+    const airportLayer = L.layerGroup().addTo(map);
+    const markers = new Map();
+    const trailLayer = L.layerGroup().addTo(map);
+    let radiusCircle = null;
+    let phaseColors = {{}};
+    let refreshTimer = null;
+    let refreshInFlight = false;
+    let paused = false;
+    let lastState = null;
+    let filtersRendered = false;
+    let selectedHex = localStorage.getItem('selectedAircraftHex') || null;
+    let replayResetNext = false;
+    let replaySeekNext = false;
+    let refreshQueued = false;
+    let settingsApplyTimer = null;
+    let replaySeekTimer = null;
+    const phaseOrder = {phase_order_json};
+    const filterOrder = [...phaseOrder, 'ANOMALY'];
+    const legendOrder = [...phaseOrder, 'ANOMALY_EDGE','ANOMALY','ANOMALY_HIGH'];
+    const visibleFilters = new Set(filterOrder);
+
+    function numericScore(row) {{
+      const value = Number(row.anomaly_score);
+      return Number.isFinite(value) ? value : null;
+    }}
+
+    function calibratedPercentile(row) {{
+      const value = Number(row.phase_distance_percentile ?? row.calibrated_anomaly_score);
+      return Number.isFinite(value) ? value : null;
+    }}
+
+    function anomalyLevel(row) {{
+      if (!row) return 'none';
+      const score = numericScore(row);
+      const pct = calibratedPercentile(row);
+      const severity = String(row.model_severity || '').toUpperCase();
+      if (row.is_anomaly) {{
+        if (pct != null && pct >= 99) return 'high';
+        if (pct != null && pct >= 97.5) return 'medium';
+        if (severity === 'OUTLIER' && score != null && score >= 2.0) return 'high';
+        if (score != null && score >= 2.0) return 'high';
+        if (score != null && score >= 1.5) return 'medium';
+        return 'edge';
+      }}
+      if (severity === 'OUTLIER') {{
+        if ((pct != null && pct >= 99) || (score != null && score >= 2.0)) return 'high';
+        return 'medium';
+      }}
+      if (severity === 'UNUSUAL') return 'medium';
+      if (severity === 'EDGE' || row.alert) return 'edge';
+      return 'none';
+    }}
+
+    function colorFor(row) {{
+      const mode = document.getElementById('colorMode').value;
+      const level = anomalyLevel(row);
+      if (level === 'high') return phaseColors.ANOMALY_HIGH || '#7f1d1d';
+      if (level === 'medium') return phaseColors.ANOMALY || '#ef4444';
+      if (level === 'edge') return phaseColors.ANOMALY_EDGE || '#facc15';
+      return phaseColors[row.display_phase || row.phase] || '#64748b';
+    }}
+
+    function labelFor(name) {{
+      return String(name || '').replaceAll('_', ' ');
+    }}
+
+    function textColorFor(background) {{
+      const color = String(background || '').replace('#', '');
+      if (!/^[0-9a-fA-F]{{6}}$/.test(color)) return '#ffffff';
+      const r = parseInt(color.slice(0, 2), 16);
+      const g = parseInt(color.slice(2, 4), 16);
+      const b = parseInt(color.slice(4, 6), 16);
+      const luminance = (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255;
+      return luminance > 0.62 ? '#111827' : '#ffffff';
+    }}
+
+    function visualStatus(row) {{
+      const level = anomalyLevel(row);
+      if (level === 'high') return 'severe anomaly';
+      if (level === 'medium') return 'anomaly';
+      if (level === 'edge') return 'borderline anomaly';
+      return row.alert ? 'watch' : (row.model_severity || 'normal');
+    }}
+
+    function markerSize(row) {{
+      const level = anomalyLevel(row);
+      if (level === 'high') return 23;
+      if (level === 'medium') return 17;
+      if (level === 'edge') return 14;
+      if (row.alert) return 15;
+      return 12;
+    }}
+
+    function markerShapeStyle(level, color, size, border, shadow) {{
+      if (level === 'edge') {{
+        return `width:${{size}}px;height:${{size}}px;background:transparent;border:${{border + 1}}px solid ${{color}};border-radius:50%;box-shadow:${{shadow}}`;
+      }}
+      if (level === 'medium') {{
+        const inner = Math.round(size * 0.74);
+        const offset = Math.round((size - inner) / 2);
+        return `width:${{inner}}px;height:${{inner}}px;margin:${{offset}}px;background:${{color}};border:${{border}}px solid white;border-radius:3px;transform:rotate(45deg);box-shadow:${{shadow}}`;
+      }}
+      if (level === 'high') {{
+        return `width:${{size}}px;height:${{size}}px;background:${{color}};border:${{border}}px solid white;border-radius:4px;box-shadow:${{shadow}}`;
+      }}
+      return `width:${{size}}px;height:${{size}}px;background:${{color}};border:${{border}}px solid white;border-radius:50%;box-shadow:${{shadow}}`;
+    }}
+
+    function legendSwatchClass(name) {{
+      if (name === 'ANOMALY_EDGE') return 'swatch anomaly-edge';
+      if (name === 'ANOMALY') return 'swatch anomaly-medium';
+      if (name === 'ANOMALY_HIGH') return 'swatch anomaly-high';
+      return 'swatch';
+    }}
+
+    function severityClass(row) {{
+      return `severity-${{String(row.model_severity || 'NO_MODEL').toLowerCase().replaceAll('_', '-')}}`;
+    }}
+
+    function escapeHtml(value) {{
+      return String(value ?? '').replace(/[&<>"']/g, ch => ({{
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#39;'
+      }}[ch]));
+    }}
+
+    function toDatetimeLocal(value) {{
+      if (!value) return '';
+      const date = new Date(value);
+      if (Number.isNaN(date.getTime())) return '';
+      const pad = n => String(n).padStart(2, '0');
+      return `${{date.getUTCFullYear()}}-${{pad(date.getUTCMonth() + 1)}}-${{pad(date.getUTCDate())}}T${{pad(date.getUTCHours())}}:${{pad(date.getUTCMinutes())}}`;
+    }}
+
+    function toTimeLocal(value) {{
+      if (!value) return '';
+      const date = new Date(value);
+      if (Number.isNaN(date.getTime())) return '';
+      const pad = n => String(n).padStart(2, '0');
+      return `${{pad(date.getHours())}}:${{pad(date.getMinutes())}}`;
+    }}
+
+    function replayTimeParam() {{
+      const value = document.getElementById('replayTime').value;
+      return value || '';
+    }}
+
+    async function loadReplayOptions() {{
+      try {{
+        const data = await fetchJson('/api/replay/options', {{}}, 120000);
+        const select = document.getElementById('replayDay');
+        const days = data.days || [];
+        if (!data.available || !days.length) {{
+          select.innerHTML = '<option value="">No replay data</option>';
+          return;
+        }}
+        const current = select.value;
+        select.innerHTML = days.map(day => {{
+          const label = day.source === 'processed' ? 'processed' : `${{day.files}} files`;
+          return `<option value="${{escapeHtml(day.day)}}">${{escapeHtml(day.day)}} (${{label}})</option>`;
+        }}).join('');
+        if (current && days.some(day => day.day === current)) select.value = current;
+      }} catch (err) {{
+        document.getElementById('replayDay').innerHTML = '<option value="">Replay unavailable</option>';
+      }}
+    }}
+
+    function markerIcon(row) {{
+      const color = colorFor(row);
+      const size = markerSize(row);
+      const level = anomalyLevel(row);
+      const border = level === 'high' ? 3 : 2;
+      const shadow = level === 'high'
+        ? '0 0 0 3px rgba(153,27,27,.18),0 2px 9px rgba(0,0,0,.55)'
+        : '0 1px 5px rgba(0,0,0,.5)';
+      const shapeStyle = markerShapeStyle(level, color, size, border, shadow);
+      return L.divIcon({{
+        className: '',
+        html: `<div style="${{shapeStyle}}"></div>`,
+        iconSize: [size, size],
+        iconAnchor: [size / 2, size / 2]
+      }});
+    }}
+
+    function airportIcon(airport) {{
+      const label = escapeHtml(airport.id || 'APT');
+      const pinClass = airport.primary ? 'airport-pin' : 'airport-pin secondary';
+      return L.divIcon({{
+        className: 'airport-marker',
+        html: `<div class="${{pinClass}}">A</div><div class="airport-label">${{label}}</div>`,
+        iconSize: airport.primary ? [34, 52] : [26, 44],
+        iconAnchor: airport.primary ? [17, 17] : [13, 13]
+      }});
+    }}
+
+    function candidateScoreText(candidate) {{
+      if (!candidate || candidate.score == null || Number.isNaN(Number(candidate.score))) return 'NA';
+      const score = Number(candidate.score).toFixed(2);
+      const pct = Number(candidate.phase_distance_percentile ?? candidate.calibrated_score);
+      return Number.isFinite(pct) ? `${{score}} p${{pct.toFixed(0)}}` : score;
+    }}
+
+    function otherModelScores(row, limit = 2) {{
+      const assigned = new Set([
+        String(row.phase || ''),
+        String(row.display_phase || ''),
+        String(row.model_scored_phase || '')
+      ].filter(Boolean));
+      const seen = new Set();
+      return (row.phase_candidates || [])
+        .filter(candidate => candidate && candidate.scored && candidate.phase)
+        .filter(candidate => {{
+          const phase = String(candidate.phase);
+          if (assigned.has(phase) || seen.has(phase)) return false;
+          seen.add(phase);
+          return true;
+        }})
+        .slice(0, limit)
+        .map(candidate => {{
+          const gate = candidate.plausible === false ? ' rejected' : '';
+          return `${{labelFor(candidate.phase)}} ${{candidateScoreText(candidate)}}${{gate}}`;
+        }});
+    }}
+
+    function renderAirports(state) {{
+      airportLayer.clearLayers();
+      const center = state.center || {{ lat: {lat}, lon: {lon} }};
+      radiusCircle = null;
+      if (document.getElementById('showAirportRadius').checked) {{
+        radiusCircle = L.circle([center.lat, center.lon], {{
+          radius: Number(state.radius_nm || 0) * 1852,
+          color: '#2563eb',
+          weight: 2,
+          opacity: 0.45,
+          fillColor: '#2563eb',
+          fillOpacity: 0.035
+        }}).addTo(airportLayer);
+      }}
+      (state.airports || []).forEach(airport => {{
+        const ll = [airport.lat, airport.lon];
+        const color = airport.primary ? '#facc15' : '#38bdf8';
+        if (document.getElementById('showAirportMarkerRings').checked) {{
+          L.circle(ll, {{
+            radius: (airport.primary ? 5 : 3) * 1852,
+            color,
+            weight: airport.primary ? 3 : 2,
+            opacity: 0.9,
+            fillColor: color,
+            fillOpacity: 0.08
+          }}).addTo(airportLayer);
+        }}
+        L.marker(ll, {{ icon: airportIcon(airport), zIndexOffset: 800 }})
+          .bindPopup(`<b>${{escapeHtml(airport.id)}}</b><br>${{escapeHtml(airport.name)}}<br>${{Number(airport.distance_nm || 0).toFixed(1)}} nm from center`)
+          .addTo(airportLayer);
+      }});
+    }}
+
+    function popup(row) {{
+      const score = row.anomaly_score == null ? 'NA' : Number(row.anomaly_score).toFixed(2);
+      const pct = calibratedPercentile(row);
+      const pctText = pct == null ? 'NA' : `p${{pct.toFixed(1)}}`;
+      const status = visualStatus(row);
+      const displayPhase = row.display_phase || row.phase;
+      const reason = row.anomaly_explanation || row.reason || 'Current segment fits the learned behavior.';
+      const nextModels = otherModelScores(row);
+      const nextModelsLine = nextModels.length ? `other models: ${{escapeHtml(nextModels.join(', '))}}<br>` : '';
+      return `<b>${{escapeHtml(row.hex)}}</b> ${{escapeHtml(row.flight || '')}}<br>
+        phase: ${{escapeHtml(displayPhase)}} (${{Number(row.phase_confidence || 0).toFixed(2)}})<br>
+        status: ${{escapeHtml(status)}}<br>
+        alt/speed: ${{Math.round(row.altitude_ft ?? 0)}} ft / ${{Math.round(row.ground_speed_kt ?? 0)}} kt<br>
+        airport: ${{escapeHtml(row.airport_id || 'none')}}<br>
+        model: ${{escapeHtml(row.model_severity || 'NO_MODEL')}}; score ${{score}}; percentile ${{pctText}}; cluster ${{escapeHtml(row.cluster ?? 'NA')}}<br>
+        ${{nextModelsLine}}
+        reason: ${{escapeHtml(reason)}}`;
+    }}
+
+    function renderLegend() {{
+      const legend = document.getElementById('legend');
+      legend.innerHTML = Object.entries(phaseColors)
+        .filter(([name]) => legendOrder.includes(name))
+        .sort(([a], [b]) => legendOrder.indexOf(a) - legendOrder.indexOf(b))
+        .map(([name, color]) => `<span><i class="${{legendSwatchClass(name)}}" style="background:${{color}}"></i>${{labelFor(name)}}</span>`)
+        .join('');
+    }}
+
+    function renderFilters() {{
+      if (filtersRendered) return;
+      const filters = document.getElementById('filters');
+      filters.innerHTML = filterOrder.map(name => `
+        <label>
+          <input type="checkbox" data-filter="${{name}}" checked>
+          <span><i class="${{legendSwatchClass(name)}}" style="background:${{phaseColors[name] || '#64748b'}}"></i>${{labelFor(name)}}</span>
+        </label>
+      `).join('');
+      filters.querySelectorAll('input').forEach(input => {{
+        input.addEventListener('change', () => {{
+          if (input.checked) visibleFilters.add(input.dataset.filter);
+          else visibleFilters.delete(input.dataset.filter);
+          if (lastState) renderState(lastState);
+        }});
+      }});
+      filtersRendered = true;
+    }}
+
+    function visibleRow(row) {{
+      if (!visibleFilters.has(row.display_phase || row.phase || 'UNKNOWN')) return false;
+      if ((row.alert || row.is_anomaly) && !visibleFilters.has('ANOMALY')) return false;
+      return true;
+    }}
+
+    function rowHtml(row) {{
+        const color = colorFor(row);
+        const score = row.anomaly_score == null ? 'NA' : Number(row.anomaly_score).toFixed(2);
+        const pct = calibratedPercentile(row);
+        const pctText = pct == null ? 'NA' : `p${{pct.toFixed(0)}}`;
+        const severity = row.model_severity || 'NO_MODEL';
+        const assignedPhase = row.display_phase || row.phase || 'UNKNOWN';
+        const rulePhase = row.rule_phase || row.phase || 'UNKNOWN';
+        const edge = severity === 'EDGE';
+        const showReason = row.alert || row.is_anomaly || row.behavior_scored === false || edge;
+        const windowCount = Number(row.anomaly_window_segments || 0);
+        const anomalyCount = Number(row.anomaly_window_anomalies || 0);
+        const ratioText = `${{Number(row.anomaly_ratio || 0).toFixed(2)}} (${{anomalyCount}}/${{windowCount}})`;
+        const watchReason = row.alert && !row.is_anomaly
+          ? `recent anomaly ratio ${{ratioText}}; current segment is normal`
+          : '';
+        const edgeReason = edge && !row.is_anomaly
+          ? `assigned ${{assignedPhase}} model score ${{score}} is near the normal boundary`
+          : '';
+        const reason = watchReason || row.anomaly_explanation || edgeReason || row.reason || '';
+        const source = watchReason ? 'Watch' : (edgeReason ? 'Model' : (row.anomaly_source || 'Reason'));
+        const level = anomalyLevel(row);
+        const rowClass = level === 'high'
+          ? 'anomaly-high'
+          : (level === 'medium'
+            ? 'anomaly-medium'
+            : (level === 'edge'
+              ? 'anomaly-edge'
+              : (row.alert ? 'watch' : (edge ? 'edge' : ''))));
+        const reasonLine = showReason && reason
+          ? `<div class="reason-line"><b>${{escapeHtml(source)}}</b>: ${{escapeHtml(reason)}}</div>`
+          : '';
+        const nextModels = otherModelScores(row);
+        const nextModelsMetric = nextModels.length
+          ? `<div class="metric-wide">next models <b>${{escapeHtml(nextModels.join(', '))}}</b></div>`
+          : '';
+        const phaseTextColor = textColorFor(color);
+        return `<div class="row ${{rowClass}} ${{row.hex === selectedHex ? 'selected' : ''}}" data-hex="${{escapeHtml(row.hex)}}">
+          <div class="row-top">
+            <div><span class="hex">${{escapeHtml(row.hex)}}</span> <span class="flight">${{escapeHtml(row.flight || '')}}</span></div>
+            <div class="control-row" style="gap:5px; justify-content:flex-end;">
+              <span class="severity-pill ${{severityClass(row)}}">${{escapeHtml(severity)}}</span>
+              <span class="pill" style="background:${{color}}; color:${{phaseTextColor}}">${{escapeHtml(assignedPhase)}}</span>
+            </div>
+          </div>
+          <div class="metrics">
+            <div>conf <b>${{Number(row.phase_confidence || 0).toFixed(2)}}</b></div>
+            <div>score <b>${{score}}</b></div>
+            <div>pct <b>${{pctText}}</b></div>
+            <div>alt <b>${{Math.round(row.altitude_ft ?? 0)}}</b> ft</div>
+            <div>spd <b>${{Math.round(row.ground_speed_kt ?? 0)}}</b> kt</div>
+            <div>cluster <b>${{escapeHtml(row.cluster ?? 'NA')}}</b></div>
+            <div>phase <b>${{escapeHtml(rulePhase)}}</b></div>
+            <div>recent <b>${{ratioText}}</b></div>
+            ${{nextModelsMetric}}
+          </div>
+          ${{reasonLine}}
+        </div>`;
+    }}
+
+    function selectAircraft(row, center = true) {{
+      selectedHex = row.hex;
+      localStorage.setItem('selectedAircraftHex', selectedHex);
+      if (center) map.setView([row.lat, row.lon], Math.max(map.getZoom(), 10));
+      if (lastState) renderState(lastState);
+    }}
+
+    function clearSelectedAircraft(refreshFromServer = true) {{
+      if (!selectedHex) return;
+      selectedHex = null;
+      localStorage.removeItem('selectedAircraftHex');
+      map.closePopup();
+      if (refreshFromServer) requestRefresh();
+      else if (lastState) renderState(lastState);
+    }}
+
+    map.on('click', () => clearSelectedAircraft(true));
+
+    function bindRowClicks(container, aircraft) {{
+      container.querySelectorAll('.row').forEach(el => {{
+        el.addEventListener('click', () => {{
+          const row = aircraft.find(item => item.hex === el.dataset.hex);
+          if (row) selectAircraft(row);
+        }});
+      }});
+    }}
+
+    function renderAlerts(aircraft) {{
+      const alerts = aircraft
+        .sort((a, b) => {{
+          const bPct = calibratedPercentile(b) ?? 0;
+          const aPct = calibratedPercentile(a) ?? 0;
+          const bScore = Number(b.anomaly_score || 0);
+          const aScore = Number(a.anomaly_score || 0);
+          return (bPct - aPct) || (bScore - aScore);
+        }})
+        .slice(0, 10);
+      const list = document.getElementById('alerts');
+      if (!alerts.length) {{
+        list.innerHTML = '<div class="empty">No aircraft match the active filters</div>';
+        return;
+      }}
+      list.innerHTML = alerts.map(rowHtml).join('');
+      bindRowClicks(list, alerts);
+    }}
+
+    function drawTrail(row, options = {{}}) {{
+      const points = (row.trail || []).filter(p => p.lat != null && p.lon != null).map(p => [p.lat, p.lon]);
+      if (points.length < 2) return;
+      const selected = row.hex === selectedHex;
+      L.polyline(points, {{
+        color: options.color || colorFor(row),
+        weight: options.weight || 5,
+        opacity: options.opacity || (selected ? 0.9 : 0.35)
+      }}).addTo(trailLayer);
+    }}
+
+    function drawTrails(aircraft) {{
+      trailLayer.clearLayers();
+      const showSelected = document.getElementById('showTrails').checked;
+      const showAll = document.getElementById('showAllTrails').checked;
+      const selected = aircraft.find(row => row.hex === selectedHex);
+      if (selected && (showSelected || showAll)) {{
+        drawTrail(selected, {{ weight: 5, opacity: 0.9 }});
+        return;
+      }}
+      if (showAll) {{
+        aircraft.forEach(row => drawTrail(row));
+      }}
+    }}
+
+    async function fetchJson(url, options = {{}}, timeoutMs = 8000) {{
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), timeoutMs);
+      try {{
+        const res = await fetch(url, {{ ...options, signal: controller.signal, cache: 'no-store' }});
+        if (!res.ok) throw new Error(`${{res.status}} ${{res.statusText}}`);
+        return await res.json();
+      }} finally {{
+        clearTimeout(timeout);
+      }}
+    }}
+
+    function scheduleRefresh(seconds) {{
+      if (refreshTimer) {{
+        clearTimeout(refreshTimer);
+        refreshTimer = null;
+      }}
+      if (!paused) {{
+        const mode = document.getElementById('modeSelect').value;
+        const speed = mode === 'replay' ? Math.max(1, Number(document.getElementById('replaySpeed').value || 1)) : 1;
+        const minDelay = mode === 'replay' ? 33 : 100;
+        refreshTimer = setTimeout(refresh, Math.max(minDelay, Number(seconds || 2) * 1000 / speed));
+      }}
+    }}
+
+    function requestRefresh() {{
+      if (refreshTimer) {{
+        clearTimeout(refreshTimer);
+        refreshTimer = null;
+      }}
+      if (refreshInFlight) {{
+        refreshQueued = true;
+        return;
+      }}
+      refresh();
+    }}
+
+    function renderState(state) {{
+      lastState = state;
+      phaseColors = state.phase_colors || phaseColors;
+      renderLegend();
+      renderFilters();
+      document.getElementById('lastPoll').textContent = state.last_poll_time || 'waiting';
+      if (state.mode === 'replay' && state.replay_time) {{
+        document.getElementById('lastPoll').textContent = `${{state.replay_time}} (replay)`;
+      }}
+      document.getElementById('pollInterval').textContent = Number(state.poll_seconds || 2);
+      document.getElementById('pollCount').textContent = state.poll_count || 0;
+      document.getElementById('radiusStatus').textContent = Number(state.radius_nm || 0).toFixed(0);
+      document.getElementById('airportCount').textContent = String((state.airports || []).length);
+      const pollInput = document.getElementById('pollSeconds');
+      if (document.activeElement !== pollInput) pollInput.value = Number(state.poll_seconds || 2);
+      const radiusInput = document.getElementById('radiusNm');
+      const radiusValue = document.getElementById('radiusValue');
+      if (document.activeElement !== radiusInput) radiusInput.value = Number(state.radius_nm || 50);
+      radiusValue.textContent = Number(radiusInput.value || state.radius_nm || 50).toFixed(0);
+      const airportTopKInput = document.getElementById('airportTopK');
+      const airportTopKValue = document.getElementById('airportTopKValue');
+      if (document.activeElement !== airportTopKInput) airportTopKInput.value = Number(state.airport_marker_top_k ?? 12);
+      airportTopKValue.textContent = String(Number(airportTopKInput.value || state.airport_marker_top_k || 12));
+      const minInput = document.getElementById('alertMinSegments');
+      if (document.activeElement !== minInput) {{
+        minInput.max = Number(state.alert_window_segments || 10);
+        minInput.value = Number(state.alert_min_segments || 5);
+      }}
+      const ratioInput = document.getElementById('alertRatio');
+      if (document.activeElement !== ratioInput) ratioInput.value = Number(state.alert_anomaly_ratio ?? 0.3);
+      const replayStepInput = document.getElementById('replayStepSeconds');
+      if (state.replay_step_seconds && document.activeElement !== replayStepInput) {{
+        replayStepInput.value = Number(state.replay_step_seconds);
+      }}
+      const replaySpeedInput = document.getElementById('replaySpeed');
+      if (state.replay_speed && document.activeElement !== replaySpeedInput) {{
+        replaySpeedInput.value = Number(state.replay_speed);
+      }}
+      const replayTimeInput = document.getElementById('replayTime');
+      const replayDayInput = document.getElementById('replayDay');
+      if (state.replay_day && replayDayInput.value !== state.replay_day) {{
+        replayDayInput.value = state.replay_day;
+      }}
+      if (state.replay_time && document.activeElement !== replayTimeInput) {{
+        replayTimeInput.value = toTimeLocal(state.replay_time);
+      }}
+      const visibleAircraft = state.aircraft.filter(visibleRow);
+      document.getElementById('count').textContent = `${{visibleAircraft.length}}/${{state.aircraft.length}}`;
+      document.getElementById('models').textContent = state.models_loaded.join(', ') || 'none';
+      document.getElementById('error').textContent = state.replay_loading
+        ? `Loading replay day ${{state.replay_loading_day}}...`
+        : (state.last_error ? `Error: ${{state.last_error}}` : '');
+      renderAirports(state);
+      const seen = new Set();
+      let firstAlert = null;
+      visibleAircraft.forEach(row => {{
+        seen.add(row.hex);
+        if (row.alert && !firstAlert) firstAlert = row;
+        const ll = [row.lat, row.lon];
+        if (!markers.has(row.hex)) {{
+          const marker = L.marker(ll, {{ icon: markerIcon(row) }}).addTo(map);
+          marker.on('click', event => {{
+            if (event.originalEvent) L.DomEvent.stopPropagation(event.originalEvent);
+            selectAircraft(row, false);
+          }});
+          markers.set(row.hex, marker);
+        }} else {{
+          markers.get(row.hex).setLatLng(ll).setIcon(markerIcon(row));
+        }}
+        markers.get(row.hex).bindPopup(popup(row));
+      }});
+      for (const [hex, marker] of markers.entries()) {{
+        if (!seen.has(hex)) {{
+          map.removeLayer(marker);
+          markers.delete(hex);
+        }}
+      }}
+      if (selectedHex && !state.aircraft.some(row => row.hex === selectedHex)) {{
+        selectedHex = null;
+        localStorage.removeItem('selectedAircraftHex');
+      }}
+      drawTrails(visibleAircraft);
+      renderAlerts(visibleAircraft);
+      if (firstAlert && document.getElementById('followAlerts').checked) {{
+        map.panTo([firstAlert.lat, firstAlert.lon]);
+      }}
+    }}
+
+    async function refresh() {{
+      if (paused) return;
+      if (refreshInFlight) {{
+        refreshQueued = true;
+        return;
+      }}
+      refreshInFlight = true;
+      try {{
+        const mode = document.getElementById('modeSelect').value;
+        const trailParams = new URLSearchParams();
+        if (selectedHex) trailParams.set('selected_hex', selectedHex);
+        if (document.getElementById('showAllTrails').checked) trailParams.set('all_trails', '1');
+        let url = `/api/state?${{trailParams.toString()}}`;
+        if (mode === 'replay') {{
+          const step = Number(document.getElementById('replayStepSeconds').value || 15);
+          const speed = Number(document.getElementById('replaySpeed').value || 1);
+          const day = document.getElementById('replayDay').value || '';
+          trailParams.set('step_seconds', step);
+          trailParams.set('replay_speed', speed);
+          trailParams.set('reset', replayResetNext ? '1' : '0');
+          trailParams.set('replay_day', day);
+          if (replaySeekNext) {{
+            const target = replayTimeParam();
+            if (target) trailParams.set('replay_time', target);
+            replaySeekNext = false;
+          }}
+          url = `/api/replay/state?${{trailParams.toString()}}`;
+          replayResetNext = false;
+        }}
+        const state = await fetchJson(url, {{}}, mode === 'replay' ? 120000 : 8000);
+        renderState(state);
+        scheduleRefresh(state.replay_loading ? 0.5 : state.poll_seconds);
+      }} catch (err) {{
+        document.getElementById('error').textContent = err.name === 'AbortError' ? 'Error: request timed out' : `Error: ${{err}}`;
+        scheduleRefresh(Number(document.getElementById('pollSeconds').value || 2));
+      }} finally {{
+        refreshInFlight = false;
+        if (refreshQueued) {{
+          refreshQueued = false;
+          requestRefresh();
+        }}
+      }}
+    }}
+
+    async function applySettings() {{
+      const payload = {{
+        poll_seconds: Number(document.getElementById('pollSeconds').value || 2),
+        radius_nm: Number(document.getElementById('radiusNm').value || 50),
+        airport_marker_top_k: Number(document.getElementById('airportTopK').value || 12),
+        alert_min_segments: Number(document.getElementById('alertMinSegments').value || 5),
+        alert_anomaly_ratio: Number(document.getElementById('alertRatio').value || 0.3)
+      }};
+      try {{
+        const state = await fetchJson('/api/settings', {{
+          method: 'POST',
+          headers: {{ 'Content-Type': 'application/json' }},
+          body: JSON.stringify(payload)
+        }});
+        renderState(state);
+        scheduleRefresh(state.poll_seconds);
+      }} catch (err) {{
+        document.getElementById('error').textContent = err.name === 'AbortError' ? 'Error: settings request timed out' : `Error: ${{err}}`;
+      }}
+    }}
+
+    function queueSettingsApply(delay = 350) {{
+      if (settingsApplyTimer) clearTimeout(settingsApplyTimer);
+      settingsApplyTimer = setTimeout(() => {{
+        settingsApplyTimer = null;
+        applySettings();
+      }}, delay);
+    }}
+
+    function seekReplayFromInput(delay = 250) {{
+      if (replaySeekTimer) clearTimeout(replaySeekTimer);
+      replaySeekTimer = setTimeout(() => {{
+        replaySeekTimer = null;
+        replayResetNext = true;
+        replaySeekNext = true;
+        if (document.getElementById('modeSelect').value !== 'replay') {{
+          document.getElementById('modeSelect').value = 'replay';
+        }}
+        requestRefresh();
+      }}, delay);
+    }}
+
+    function setControlsOpen(open) {{
+      document.getElementById('controlPopover').classList.toggle('open', open);
+      document.getElementById('controlsToggle').classList.toggle('active', open);
+    }}
+
+    function initSidebarResize() {{
+      const stored = Number(localStorage.getItem('dashboardSidebarWidth') || 0);
+      if (stored) document.body.style.setProperty('--sidebar-width', `${{Math.max(320, Math.min(760, stored))}}px`);
+      const splitter = document.getElementById('splitter');
+      let resizing = false;
+      splitter.addEventListener('pointerdown', event => {{
+        if (window.innerWidth <= 900) return;
+        resizing = true;
+        splitter.setPointerCapture(event.pointerId);
+        document.body.classList.add('resizing');
+        event.preventDefault();
+      }});
+      splitter.addEventListener('pointermove', event => {{
+        if (!resizing) return;
+        const width = Math.max(320, Math.min(760, window.innerWidth - event.clientX - splitter.offsetWidth));
+        document.body.style.setProperty('--sidebar-width', `${{width}}px`);
+        localStorage.setItem('dashboardSidebarWidth', String(Math.round(width)));
+        setTimeout(() => map.invalidateSize(), 0);
+      }});
+      function stopResize(event) {{
+        if (!resizing) return;
+        resizing = false;
+        document.body.classList.remove('resizing');
+        try {{ splitter.releasePointerCapture(event.pointerId); }} catch (err) {{}}
+        setTimeout(() => map.invalidateSize(), 0);
+      }}
+      splitter.addEventListener('pointerup', stopResize);
+      splitter.addEventListener('pointercancel', stopResize);
+    }}
+
+    document.getElementById('controlsToggle').addEventListener('click', () => {{
+      setControlsOpen(!document.getElementById('controlPopover').classList.contains('open'));
+    }});
+    document.getElementById('controlsClose').addEventListener('click', () => setControlsOpen(false));
+    document.addEventListener('keydown', event => {{
+      if (event.key === 'Escape') setControlsOpen(false);
+    }});
+    initSidebarResize();
+    document.getElementById('pauseToggle').addEventListener('click', () => {{
+      paused = !paused;
+      document.getElementById('pauseToggle').textContent = paused ? 'Resume' : 'Pause';
+      document.getElementById('pauseToggle').classList.toggle('active', paused);
+      if (paused && refreshTimer) {{
+        clearTimeout(refreshTimer);
+        refreshTimer = null;
+      }}
+      if (!paused) requestRefresh();
+    }});
+    document.getElementById('modeSelect').addEventListener('change', () => {{
+      replayResetNext = document.getElementById('modeSelect').value === 'replay';
+      selectedHex = null;
+      localStorage.removeItem('selectedAircraftHex');
+      for (const marker of markers.values()) map.removeLayer(marker);
+      markers.clear();
+      trailLayer.clearLayers();
+      requestRefresh();
+    }});
+    document.getElementById('replayDay').addEventListener('change', () => {{
+      replayResetNext = true;
+      replaySeekNext = false;
+      document.getElementById('replayTime').value = '';
+      if (document.getElementById('modeSelect').value !== 'replay') {{
+        document.getElementById('modeSelect').value = 'replay';
+      }}
+      requestRefresh();
+    }});
+    document.getElementById('resetReplay').addEventListener('click', () => {{
+      replayResetNext = true;
+      replaySeekNext = false;
+      if (document.getElementById('modeSelect').value !== 'replay') {{
+        document.getElementById('modeSelect').value = 'replay';
+      }}
+      requestRefresh();
+    }});
+    document.getElementById('replayStepSeconds').addEventListener('input', requestRefresh);
+    document.getElementById('replayStepSeconds').addEventListener('change', requestRefresh);
+    document.getElementById('replayTime').addEventListener('input', () => seekReplayFromInput());
+    document.getElementById('replayTime').addEventListener('change', () => seekReplayFromInput(0));
+    document.getElementById('replayTime').addEventListener('keydown', event => {{
+      if (event.key === 'Enter') seekReplayFromInput(0);
+    }});
+    document.getElementById('replaySpeed').addEventListener('input', requestRefresh);
+    document.getElementById('replaySpeed').addEventListener('change', () => {{
+      if (lastState) scheduleRefresh(lastState.poll_seconds);
+    }});
+    document.getElementById('showTrails').addEventListener('change', () => {{
+      if (lastState) renderState(lastState);
+    }});
+    document.getElementById('showAllTrails').addEventListener('change', () => {{
+      if (lastState) renderState(lastState);
+    }});
+    document.getElementById('showAirportRadius').addEventListener('change', () => {{
+      if (lastState) renderAirports(lastState);
+    }});
+    document.getElementById('showAirportMarkerRings').addEventListener('change', () => {{
+      if (lastState) renderAirports(lastState);
+    }});
+    document.getElementById('colorMode').addEventListener('change', () => {{
+      if (lastState) renderState(lastState);
+    }});
+    document.getElementById('pollSeconds').addEventListener('input', () => queueSettingsApply());
+    document.getElementById('pollSeconds').addEventListener('change', () => queueSettingsApply(0));
+    document.getElementById('pollSeconds').addEventListener('keydown', event => {{
+      if (event.key === 'Enter') applySettings();
+    }});
+    document.getElementById('radiusNm').addEventListener('input', () => {{
+      document.getElementById('radiusValue').textContent = document.getElementById('radiusNm').value;
+      queueSettingsApply();
+    }});
+    document.getElementById('radiusNm').addEventListener('change', () => queueSettingsApply(0));
+    document.getElementById('airportTopK').addEventListener('input', () => {{
+      document.getElementById('airportTopKValue').textContent = document.getElementById('airportTopK').value;
+      queueSettingsApply();
+    }});
+    document.getElementById('airportTopK').addEventListener('change', () => queueSettingsApply(0));
+    document.getElementById('alertMinSegments').addEventListener('input', () => queueSettingsApply());
+    document.getElementById('alertMinSegments').addEventListener('change', () => queueSettingsApply(0));
+    document.getElementById('alertMinSegments').addEventListener('keydown', event => {{
+      if (event.key === 'Enter') applySettings();
+    }});
+    document.getElementById('alertRatio').addEventListener('input', () => queueSettingsApply());
+    document.getElementById('alertRatio').addEventListener('change', () => queueSettingsApply(0));
+    document.getElementById('alertRatio').addEventListener('keydown', event => {{
+      if (event.key === 'Enter') applySettings();
+    }});
+    refresh();
+    loadReplayOptions();
+  </script>
+</body>
+</html>

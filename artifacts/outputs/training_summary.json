@@ -1,0 +1,334 @@
+{
+  "models": [
+    {
+      "phase": "DEPARTURE",
+      "n_segments": 5000,
+      "n_clusters": 1,
+      "noise_rate": 0.0368,
+      "n_core_samples": 4500,
+      "selected_eps": 0.7129548266569938,
+      "min_unique_tracks": 5,
+      "n_available_segments": 9010,
+      "n_clean_training_segments": 9010,
+      "distance_calibration": {
+        "reference": "dbscan_inliers",
+        "n_reference": 4816,
+        "n_noise_training_segments": 184,
+        "percentiles": {
+          "p50": 0.0,
+          "p75": 0.0,
+          "p90": 0.0,
+          "p95": 0.4323593161037017,
+          "p97_5": 0.5640792343066116,
+          "p99": 0.644447859653786
+        }
+      }
+    },
+    {
+      "phase": "ENROUTE_CLIMB",
+      "n_segments": 5000,
+      "n_clusters": 1,
+      "noise_rate": 0.0378,
+      "n_core_samples": 4500,
+      "selected_eps": 0.7093397030062751,
+      "min_unique_tracks": 4,
+      "n_available_segments": 26371,
+      "n_clean_training_segments": 26371,
+      "distance_calibration": {
+        "reference": "dbscan_inliers",
+        "n_reference": 4811,
+        "n_noise_training_segments": 189,
+        "percentiles": {
+          "p50": 0.0,
+          "p75": 0.0,
+          "p90": 0.0,
+          "p95": 0.47327626161012637,
+          "p97_5": 0.58672337768029,
+          "p99": 0.6539717097737878
+        }
+      }
+    },
+    {
+      "phase": "FINAL_APPROACH",
+      "n_segments": 5000,
+      "n_clusters": 1,
+      "noise_rate": 0.0468,
+      "n_core_samples": 4500,
+      "selected_eps": 1.0566225136640557,
+      "min_unique_tracks": 5,
+      "n_available_segments": 15363,
+      "n_clean_training_segments": 15363,
+      "distance_calibration": {
+        "reference": "dbscan_inliers",
+        "n_reference": 4766,
+        "n_noise_training_segments": 234,
+        "percentiles": {
+          "p50": 0.0,
+          "p75": 0.0,
+          "p90": 0.0,
+          "p95": 0.5584406015415327,
+          "p97_5": 0.7958354091329528,
+          "p99": 0.9277745424406905
+        }
+      }
+    },
+    {
+      "phase": "INITIAL_APPROACH",
+      "n_segments": 5000,
+      "n_clusters": 4,
+      "noise_rate": 0.052,
+      "n_core_samples": 4500,
+      "selected_eps": 0.6211727852198143,
+      "min_unique_tracks": 4,
+      "n_available_segments": 6336,
+      "n_clean_training_segments": 6336,
+      "distance_calibration": {
+        "reference": "dbscan_inliers",
+        "n_reference": 4740,
+        "n_noise_training_segments": 260,
+        "percentiles": {
+          "p50": 0.0,
+          "p75": 0.0,
+          "p90": 0.0,
+          "p95": 0.18602109490667618,
+          "p97_5": 0.48050979466081883,
+          "p99": 0.5588649810394374
+        }
+      }
+    },
+    {
+      "phase": "INTERMEDIATE_APPROACH",
+      "n_segments": 5000,
+      "n_clusters": 1,
+      "noise_rate": 0.0376,
+      "n_core_samples": 4500,
+      "selected_eps": 1.0089332324724758,
+      "min_unique_tracks": 5,
+      "n_available_segments": 56869,
+      "n_clean_training_segments": 56723,
+      "distance_calibration": {
+        "reference": "dbscan_inliers",
+        "n_reference": 4812,
+        "n_noise_training_segments": 188,
+        "percentiles": {
+          "p50": 0.0,
+          "p75": 0.0,
+          "p90": 0.0,
+          "p95": 0.5663724956775423,
+          "p97_5": 0.7561217400681591,
+          "p99": 0.8751192907852622
+        }
+      }
+    }
+  ],
+  "n_segments": 428212,
+  "training_source": {
+    "kind": "feature_cache",
+    "path": "F:\\ML Project\\adsb_phase_dbscan\\artifacts\\training_cache\\atl_segments.csv.gz"
+  },
+  "source_manifest": {
+    "input_path": "F:\\ML Project\\processed\\extracted_days",
+    "output": "F:\\ML Project\\adsb_phase_dbscan\\artifacts\\training_cache\\atl_segments.csv.gz",
+    "radius_nm": 120.0,
+    "workers": 12,
+    "day_workers": 2,
+    "day_mode": "bulk",
+    "shard_dir": "F:\\ML Project\\adsb_phase_dbscan\\artifacts\\training_cache\\atl_segments_day_shards",
+    "shard_format": ".parquet",
+    "context_config_fingerprint": "0e4f433c38194211d49a1d5ae9f3088ddaaccca7b81cebc5765f2568775ae0c6",
+    "airport_count": 1,
+    "files": [
+      "F:\\ML Project\\processed\\extracted_days\\Dec_20_2025.jsonl.gz",
+      "F:\\ML Project\\processed\\extracted_days\\Dec_21_2025.jsonl.gz",
+      "F:\\ML Project\\processed\\extracted_days\\Dec_22_2025.jsonl.gz",
+      "F:\\ML Project\\processed\\extracted_days\\Dec_23_2025.jsonl.gz",
+      "F:\\ML Project\\processed\\extracted_days\\Dec_24_2025.jsonl.gz",
+      "F:\\ML Project\\processed\\extracted_days\\Dec_25_2025.jsonl.gz",
+      "F:\\ML Project\\processed\\extracted_days\\Dec_26_2025.jsonl.gz",
+      "F:\\ML Project\\processed\\extracted_days\\Dec_27_2025.jsonl.gz",
+      "F:\\ML Project\\processed\\extracted_days\\Dec_28_2025.jsonl.gz",
+      "F:\\ML Project\\processed\\extracted_days\\Dec_29_2025.jsonl.gz",
+      "F:\\ML Project\\processed\\extracted_days\\Dec_30_2025.jsonl.gz"
+    ],
+    "days": [
+      {
+        "day": "Dec 20 2025",
+        "source_file": "Dec_20_2025.jsonl.gz",
+        "status": "skipped",
+        "segments": 60375,
+        "phase_counts": {
+          "UNKNOWN": 53479,
+          "ENROUTE_CLIMB": 2137,
+          "FINAL_ARRIVAL": 1856,
+          "OUTER_ARRIVAL": 1772,
+          "DEPARTURE": 719,
+          "TERMINAL_ARRIVAL": 412
+        },
+        "shard": "artifacts\\training_cache\\atl_segments_day_shards\\dec_20_2025.parquet"
+      },
+      {
+        "day": "Dec 21 2025",
+        "source_file": "Dec_21_2025.jsonl.gz",
+        "status": "skipped",
+        "segments": 37507,
+        "phase_counts": {
+          "UNKNOWN": 30563,
+          "ENROUTE_CLIMB": 2737,
+          "FINAL_ARRIVAL": 1557,
+          "OUTER_ARRIVAL": 1515,
+          "DEPARTURE": 890,
+          "TERMINAL_ARRIVAL": 245
+        },
+        "shard": "artifacts\\training_cache\\atl_segments_day_shards\\dec_21_2025.parquet"
+      },
+      {
+        "day": "Dec 22 2025",
+        "source_file": "Dec_22_2025.jsonl.gz",
+        "status": "skipped",
+        "segments": 42029,
+        "phase_counts": {
+          "UNKNOWN": 38386,
+          "FINAL_ARRIVAL": 1435,
+          "ENROUTE_CLIMB": 1133,
+          "OUTER_ARRIVAL": 626,
+          "DEPARTURE": 358,
+          "TERMINAL_ARRIVAL": 91
+        },
+        "shard": "artifacts\\training_cache\\atl_segments_day_shards\\dec_22_2025.parquet"
+      },
+      {
+        "day": "Dec 23 2025",
+        "source_file": "Dec_23_2025.jsonl.gz",
+        "status": "skipped",
+        "segments": 44073,
+        "phase_counts": {
+          "UNKNOWN": 41647,
+          "FINAL_ARRIVAL": 994,
+          "ENROUTE_CLIMB": 708,
+          "OUTER_ARRIVAL": 506,
+          "DEPARTURE": 153,
+          "TERMINAL_ARRIVAL": 65
+        },
+        "shard": "artifacts\\training_cache\\atl_segments_day_shards\\dec_23_2025.parquet"
+      },
+      {
+        "day": "Dec 24 2025",
+        "source_file": "Dec_24_2025.jsonl.gz",
+        "status": "skipped",
+        "segments": 25821,
+        "phase_counts": {
+          "UNKNOWN": 24551,
+          "FINAL_ARRIVAL": 609,
+          "ENROUTE_CLIMB": 356,
+          "OUTER_ARRIVAL": 190,
+          "DEPARTURE": 96,
+          "TERMINAL_ARRIVAL": 19
+        },
+        "shard": "artifacts\\training_cache\\atl_segments_day_shards\\dec_24_2025.parquet"
+      },
+      {
+        "day": "Dec 25 2025",
+        "source_file": "Dec_25_2025.jsonl.gz",
+        "status": "skipped",
+        "segments": 11158,
+        "phase_counts": {
+          "UNKNOWN": 10283,
+          "ENROUTE_CLIMB": 387,
+          "FINAL_ARRIVAL": 224,
+          "OUTER_ARRIVAL": 182,
+          "DEPARTURE": 64,
+          "TERMINAL_ARRIVAL": 18
+        },
+        "shard": "artifacts\\training_cache\\atl_segments_day_shards\\dec_25_2025.parquet"
+      },
+      {
+        "day": "Dec 26 2025",
+        "source_file": "Dec_26_2025.jsonl.gz",
+        "status": "skipped",
+        "segments": 40416,
+        "phase_counts": {
+          "UNKNOWN": 28173,
+          "ENROUTE_CLIMB": 4703,
+          "OUTER_ARRIVAL": 3225,
+          "FINAL_ARRIVAL": 2421,
+          "DEPARTURE": 1396,
+          "TERMINAL_ARRIVAL": 498
+        },
+        "shard": "artifacts\\training_cache\\atl_segments_day_shards\\dec_26_2025.parquet"
+      },
+      {
+        "day": "Dec 27 2025",
+        "source_file": "Dec_27_2025.jsonl.gz",
+        "status": "built",
+        "segments": 64796,
+        "phase_counts": {
+          "UNKNOWN": 40198,
+          "ENROUTE_CLIMB": 9502,
+          "TERMINAL_ARRIVAL": 7390,
+          "FINAL_ARRIVAL": 4464,
+          "DEPARTURE": 2981,
+          "OUTER_ARRIVAL": 261
+        },
+        "shard": "artifacts\\training_cache\\atl_segments_day_shards\\dec_27_2025.parquet",
+        "elapsed_s": 663.922
+      },
+      {
+        "day": "Dec 28 2025",
+        "source_file": "Dec_28_2025.jsonl.gz",
+        "status": "built",
+        "segments": 48153,
+        "phase_counts": {
+          "UNKNOWN": 24828,
+          "ENROUTE_CLIMB": 9139,
+          "TERMINAL_ARRIVAL": 7190,
+          "FINAL_ARRIVAL": 3766,
+          "DEPARTURE": 2877,
+          "OUTER_ARRIVAL": 353
+        },
+        "shard": "artifacts\\training_cache\\atl_segments_day_shards\\dec_28_2025.parquet",
+        "elapsed_s": 552.109
+      },
+      {
+        "day": "Dec 29 2025",
+        "source_file": "Dec_29_2025.jsonl.gz",
+        "status": "built",
+        "segments": 19745,
+        "phase_counts": {
+          "UNKNOWN": 14392,
+          "ENROUTE_CLIMB": 2373,
+          "TERMINAL_ARRIVAL": 1518,
+          "FINAL_ARRIVAL": 701,
+          "DEPARTURE": 671,
+          "OUTER_ARRIVAL": 90
+        },
+        "shard": "artifacts\\training_cache\\atl_segments_day_shards\\dec_29_2025.parquet",
+        "elapsed_s": 177.953
+      },
+      {
+        "day": "Dec 30 2025",
+        "source_file": "Dec_30_2025.jsonl.gz",
+        "status": "built",
+        "segments": 34139,
+        "phase_counts": {
+          "UNKNOWN": 31739,
+          "FINAL_ARRIVAL": 833,
+          "TERMINAL_ARRIVAL": 805,
+          "ENROUTE_CLIMB": 530,
+          "DEPARTURE": 173,
+          "OUTER_ARRIVAL": 59
+        },
+        "shard": "artifacts\\training_cache\\atl_segments_day_shards\\dec_30_2025.parquet",
+        "elapsed_s": 172.031
+      }
+    ],
+    "n_segments": 428212,
+    "phase_counts": {
+      "UNKNOWN": 338239,
+      "ENROUTE_CLIMB": 33705,
+      "FINAL_ARRIVAL": 18860,
+      "TERMINAL_ARRIVAL": 18251,
+      "DEPARTURE": 10378,
+      "OUTER_ARRIVAL": 8779
+    }
+  }
+}

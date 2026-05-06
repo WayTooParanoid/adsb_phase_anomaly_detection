@@ -1,0 +1,2864 @@
+airport:
+  id: ATL
+  name: ATL
+  lat: 33.6407
+  lon: -84.4277
+  elevation_ft: 1026
+airports:
+- id: ATL
+  name: Hartsfield-Jackson Atlanta International Airport
+  lat: 33.6407
+  lon: -84.4277
+  elevation_ft: 1026
+  arrival_radius_nm: 90
+  departure_radius_nm: 90
+  ground_radius_nm: 5
+  terminal_radius_nm: 120
+  primary: true
+  runways:
+  - id: 08L/26R
+    bearing_deg: 95
+  - id: 08R/26L
+    bearing_deg: 95
+  - id: 09L/27R
+    bearing_deg: 95
+  - id: 09R/27L
+    bearing_deg: 95
+  - id: 10/28
+    bearing_deg: 100
+- id: GA95
+  name: Coleman Field
+  lat: 33.526199
+  lon: -84.502197
+  elevation_ft: 1010
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: GA92
+  name: Beck Field
+  lat: 33.52123
+  lon: -84.510211
+  elevation_ft: 990
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: GA94
+  name: McLendon Airport
+  lat: 33.491501
+  lon: -84.489403
+  elevation_ft: 900
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: FTY
+  name: Fulton County Airport Brown Field
+  lat: 33.779099
+  lon: -84.5214
+  elevation_ft: 841
+  arrival_radius_nm: 25
+  departure_radius_nm: 15
+  ground_radius_nm: 4
+  terminal_radius_nm: 35
+- id: GA90
+  name: Walker Field
+  lat: 33.451329
+  lon: -84.408624
+  elevation_ft: 875
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 51GA
+  name: Smith Field
+  lat: 33.508099
+  lon: -84.600502
+  elevation_ft: 920
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 25GA
+  name: Miller Farm Airport
+  lat: 33.659797
+  lon: -84.663103
+  elevation_ft: 750
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 89GE
+  name: South Fulton Airport
+  lat: 33.537601
+  lon: -84.638802
+  elevation_ft: 1025
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: GA89
+  name: Diamond S Airport
+  lat: 33.4758
+  lon: -84.276901
+  elevation_ft: 910
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 4GA6
+  name: Chattahoochee Air Park
+  lat: 33.662328
+  lon: -84.680122
+  elevation_ft: 750
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 54GA
+  name: Deerfield Landing Airport
+  lat: 33.464298
+  lon: -84.268303
+  elevation_ft: 890
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 19GA
+  name: Willow Pond Aviation Inc Airport
+  lat: 33.424039
+  lon: -84.498367
+  elevation_ft: 868
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 7GA7
+  name: Berry Hill Airport
+  lat: 33.535567
+  lon: -84.179081
+  elevation_ft: 770
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 4GE2
+  name: Gorden E Bellah International Airport
+  lat: 33.550098
+  lon: -84.166603
+  elevation_ft: 780
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 3GA0
+  name: Grant Airport
+  lat: 33.5275
+  lon: -84.156898
+  elevation_ft: 790
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: PDK
+  name: DeKalb Peachtree Airport
+  lat: 33.87633
+  lon: -84.30213
+  elevation_ft: 1003
+  arrival_radius_nm: 25
+  departure_radius_nm: 15
+  ground_radius_nm: 4
+  terminal_radius_nm: 35
+- id: HMP
+  name: Atlanta Speedway Airport
+  lat: 33.389876
+  lon: -84.331011
+  elevation_ft: 882
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 2GE8
+  name: Andy Fields Airport
+  lat: 33.464199
+  lon: -84.6633
+  elevation_ft: 980
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: GA31
+  name: Two Rocks Airport
+  lat: 33.469422
+  lon: -84.669026
+  elevation_ft: 964
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: MGE
+  name: Dobbins Air Reserve Base
+  lat: 33.915401
+  lon: -84.516296
+  elevation_ft: 1068
+  arrival_radius_nm: 25
+  departure_radius_nm: 15
+  ground_radius_nm: 4
+  terminal_radius_nm: 35
+- id: 0GA0
+  name: Halls Flying Ranch Airport
+  lat: 33.356201
+  lon: -84.367104
+  elevation_ft: 800
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 29GA
+  name: Rolling Meadows Airfield
+  lat: 33.3843
+  lon: -84.631897
+  elevation_ft: 808
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: FFC
+  name: Peachtree City Falcon Field
+  lat: 33.3573
+  lon: -84.5718
+  elevation_ft: 808
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: GA82
+  name: Rust Airstrip
+  lat: 33.3326
+  lon: -84.401901
+  elevation_ft: 810
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 00GA
+  name: Lt World Airport
+  lat: 33.767502
+  lon: -84.068298
+  elevation_ft: 700
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: US-4647
+  name: Clint Odom Airport
+  lat: 33.41718
+  lon: -84.71221
+  elevation_ft: 928
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 10GA
+  name: Beaverbrook Aerodrome
+  lat: 33.3251
+  lon: -84.298302
+  elevation_ft: 910
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 0GE4
+  name: Pecan Patch Airstrip
+  lat: 33.331402
+  lon: -84.266701
+  elevation_ft: 860
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 0GE0
+  name: Pinewood Airport
+  lat: 33.782101
+  lon: -84.800797
+  elevation_ft: 1085
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: GA04
+  name: Mallards Landing Airport
+  lat: 33.364574
+  lon: -84.168249
+  elevation_ft: 837
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 8GA9
+  name: Brook Bridge Aerodrome
+  lat: 33.276798
+  lon: -84.410797
+  elevation_ft: 820
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 64GA
+  name: Big T Airport
+  lat: 33.283501
+  lon: -84.538803
+  elevation_ft: 900
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: GA61
+  name: Kenley Field
+  lat: 33.269234
+  lon: -84.497624
+  elevation_ft: 780
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 36GA
+  name: Lola Landing Airport
+  lat: 33.72423
+  lon: -83.97608
+  elevation_ft: 870
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: GA62
+  name: Cedar Ridge Airport
+  lat: 33.2551
+  lon: -84.4002
+  elevation_ft: 820
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 5GA5
+  name: Pinebrook Estates Airport
+  lat: 33.2598
+  lon: -84.349403
+  elevation_ft: 820
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: GA80
+  name: Whispering Pines Airport
+  lat: 33.782299
+  lon: -83.9888
+  elevation_ft: 940
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 2GA9
+  name: Lenora Airport
+  lat: 33.8046
+  lon: -83.9963
+  elevation_ft: 940
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 81GA
+  name: Lucky Lairds Landing Airport
+  lat: 33.6409
+  lon: -84.9049
+  elevation_ft: 1130
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 20GA
+  name: Earl L. Small Jr. Field/Stockmar Airport
+  lat: 33.7565
+  lon: -84.884697
+  elevation_ft: 1110
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 7GA9
+  name: Smisson Field
+  lat: 33.570599
+  lon: -84.897797
+  elevation_ft: 1044
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: GE53
+  name: Chigger Hill Airport
+  lat: 33.316745
+  lon: -84.150612
+  elevation_ft: 800
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 3GA6
+  name: Erlen Airport
+  lat: 33.570599
+  lon: -84.8983
+  elevation_ft: 1044
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: RYY
+  name: Cobb County International Airport-McCollum Field
+  lat: 34.01316
+  lon: -84.59721
+  elevation_ft: 1040
+  arrival_radius_nm: 25
+  departure_radius_nm: 15
+  ground_radius_nm: 4
+  terminal_radius_nm: 35
+- id: 6GA5
+  name: Kolibri Airport
+  lat: 33.579378
+  lon: -84.902771
+  elevation_ft: 1100
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 17GA
+  name: Panther Creek Airport
+  lat: 33.466702
+  lon: -84.866096
+  elevation_ft: 850
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 5GA9
+  name: Rayworth Landing
+  lat: 33.60125
+  lon: -84.914861
+  elevation_ft: 1259
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 5GA2
+  name: Lyons Landing Airport
+  lat: 33.572922
+  lon: -84.910713
+  elevation_ft: 1080
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: GE33
+  name: River Bend Airport
+  lat: 33.304319
+  lon: -84.136798
+  elevation_ft: 718
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 5GA0
+  name: Gable Branch Airport
+  lat: 33.2276
+  lon: -84.544403
+  elevation_ft: 840
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 3GA5
+  name: Diamond R Ranch Airport
+  lat: 33.637831
+  lon: -84.940542
+  elevation_ft: 1213
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 6A2
+  name: Griffin Spalding County Airport
+  lat: 33.227001
+  lon: -84.274902
+  elevation_ft: 958
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: CCO
+  name: Newnan Coweta County Airport
+  lat: 33.3116
+  lon: -84.769798
+  elevation_ft: 970
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: US-6486
+  name: Shackleford Airport
+  lat: 33.20309
+  lon: -84.37866
+  elevation_ft: 900
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 96GA
+  name: 3-M's Airport
+  lat: 33.185799
+  lon: -84.368103
+  elevation_ft: 890
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 6GA1
+  name: Fagundes Field
+  lat: 33.19998
+  lon: -84.581747
+  elevation_ft: 864
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: GA2
+  name: Peach State Aerodrome
+  lat: 33.183534
+  lon: -84.377997
+  elevation_ft: 926
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 74GA
+  name: Johnson Airport
+  lat: 33.225688
+  lon: -84.665982
+  elevation_ft: 830
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: US-5884
+  name: Chappell Crook Airport
+  lat: 33.1997
+  lon: -84.60184
+  elevation_ft: 764
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 5GA4
+  name: Air Acres Airport
+  lat: 34.1059
+  lon: -84.448502
+  elevation_ft: 918
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 95GA
+  name: McIntosh Field
+  lat: 33.455898
+  lon: -84.943001
+  elevation_ft: 771
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 91GA
+  name: Flying Frog Field Airport
+  lat: 33.273602
+  lon: -84.793297
+  elevation_ft: 910
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: GA73
+  name: Shade Tree Airport
+  lat: 33.16283
+  lon: -84.445239
+  elevation_ft: 850
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 2GA1
+  name: Poole Farm Airport
+  lat: 33.680698
+  lon: -83.852699
+  elevation_ft: 830
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: CVC
+  name: Covington Municipal Airport
+  lat: 33.6325
+  lon: -83.849602
+  elevation_ft: 809
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 8GA8
+  name: Falcons Aerie Airport
+  lat: 33.577301
+  lon: -85.002998
+  elevation_ft: 1180
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 5GA3
+  name: Eagles Landing Airport
+  lat: 33.160099
+  lon: -84.365196
+  elevation_ft: 980
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: GA29
+  name: Wellers Landing Airport
+  lat: 33.156087
+  lon: -84.431201
+  elevation_ft: 843
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 27GA
+  name: Wilson Airstrip
+  lat: 33.658193
+  lon: -85.010195
+  elevation_ft: 1050
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 8GA6
+  name: S & S Landing Strip
+  lat: 33.161388
+  lon: -84.320517
+  elevation_ft: 900
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: GA79
+  name: Dresden Airport
+  lat: 33.344799
+  lon: -84.911301
+  elevation_ft: 800
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 6GA4
+  name: Spring Valley Farm Airport
+  lat: 33.7971
+  lon: -83.851303
+  elevation_ft: 920
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: PUJ
+  name: Silver Comet Field at Paulding Northwest Atlanta Airport
+  lat: 33.912328
+  lon: -84.941111
+  elevation_ft: 1289
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 3GA9
+  name: Vintage Field
+  lat: 33.133499
+  lon: -84.377403
+  elevation_ft: 873
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 78GA
+  name: C&R Farm Airport
+  lat: 33.504299
+  lon: -85.017197
+  elevation_ft: 1013
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 77GA
+  name: Toland Airport
+  lat: 33.163124
+  lon: -84.210258
+  elevation_ft: 800
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: LZU
+  name: Gwinnett County Briscoe Field
+  lat: 33.9781
+  lon: -83.962402
+  elevation_ft: 1061
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 0GA6
+  name: Sunset Strip
+  lat: 33.733398
+  lon: -83.818802
+  elevation_ft: 780
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 80GA
+  name: Murphy's Landing Airport
+  lat: 33.259103
+  lon: -84.844937
+  elevation_ft: 820
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 4GA7
+  name: Kitchens Field
+  lat: 33.134568
+  lon: -84.253287
+  elevation_ft: 800
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: GA83
+  name: Windy Hill Airport
+  lat: 33.546799
+  lon: -83.805496
+  elevation_ft: 740
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 6GA0
+  name: Stoney Point Field
+  lat: 34.132599
+  lon: -84.199402
+  elevation_ft: 1150
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: GA68
+  name: Flying H Ranch Airport
+  lat: 33.11285
+  lon: -84.450366
+  elevation_ft: 800
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 62GA
+  name: Seven Lakes Airport
+  lat: 33.3246
+  lon: -83.916298
+  elevation_ft: 630
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 1GA2
+  name: Flying N Estates Airport
+  lat: 33.175358
+  lon: -84.747756
+  elevation_ft: 870
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 1GE5
+  name: Flying D Airport
+  lat: 33.1012
+  lon: -84.393501
+  elevation_ft: 838
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 9GE7
+  name: Neely Farms Airport
+  lat: 33.531389
+  lon: -83.791944
+  elevation_ft: 720
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 0GA3
+  name: Ayresouth Airport
+  lat: 33.7701
+  lon: -85.060799
+  elevation_ft: 1287
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 07GA
+  name: Alcovy Airport
+  lat: 33.674263
+  lon: -83.764637
+  elevation_ft: 750
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: GA75
+  name: Meadowlark Airport
+  lat: 33.087299
+  lon: -84.405197
+  elevation_ft: 784
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: GA10
+  name: Ridgeview Farm Airport
+  lat: 33.080396
+  lon: -84.359121
+  elevation_ft: 854
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 2GE5
+  name: Chukkar Farm Ultralightport
+  lat: 34.1978
+  lon: -84.319397
+  elevation_ft: 1000
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 30GA
+  name: Cox Field
+  lat: 33.282886
+  lon: -83.901367
+  elevation_ft: 697
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 6GE4
+  name: M K Field
+  lat: 33.168711
+  lon: -84.830021
+  elevation_ft: 866
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 9GA0
+  name: Brown Field
+  lat: 33.057098
+  lon: -84.3424
+  elevation_ft: 864
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: VPC
+  name: Cartersville Airport
+  lat: 34.1231
+  lon: -84.848701
+  elevation_ft: 759
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 4GA1
+  name: Thacker Field
+  lat: 33.0448
+  lon: -84.3983
+  elevation_ft: 920
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 2GA5
+  name: Windrift Aerodrome
+  lat: 33.041801
+  lon: -84.432098
+  elevation_ft: 780
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: GA74
+  name: Takle Field
+  lat: 33.041801
+  lon: -84.412399
+  elevation_ft: 850
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: CTJ
+  name: West Georgia Regional Airport / O V Gray Field
+  lat: 33.631001
+  lon: -85.152
+  elevation_ft: 1161
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 98GA
+  name: Circle T Airport
+  lat: 33.2057
+  lon: -83.912399
+  elevation_ft: 545
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: GA59
+  name: Antique Acres Airport
+  lat: 33.100101
+  lon: -84.058502
+  elevation_ft: 800
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 7GE7
+  name: Brandt Field
+  lat: 33.046389
+  lon: -84.661111
+  elevation_ft: 840
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: D73
+  name: Monroe Walton County Airport
+  lat: 33.782398
+  lon: -83.692903
+  elevation_ft: 875
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 7GE5
+  name: Sunset Strip
+  lat: 33.3592
+  lon: -85.1175
+  elevation_ft: 740
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 18GA
+  name: Sleepy Hollow Airport
+  lat: 33.693199
+  lon: -83.6577
+  elevation_ft: 750
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 6GA8
+  name: Flying W Farms Airport
+  lat: 33.507801
+  lon: -85.1856
+  elevation_ft: 1010
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: US-5673
+  name: Moore Airport
+  lat: 34.27586
+  lon: -84.59022
+  elevation_ft: 927
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 8GA1
+  name: Gum Creek Airport
+  lat: 33.4212
+  lon: -85.161903
+  elevation_ft: 1070
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 1GA9
+  name: Aerie Airport
+  lat: 33.761608
+  lon: -83.652704
+  elevation_ft: 830
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: GA76
+  name: Broken Ranch Airport
+  lat: 33.1549
+  lon: -83.898804
+  elevation_ft: 620
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: GA06
+  name: Monticello Sky Ranch Airport
+  lat: 33.3325
+  lon: -83.726898
+  elevation_ft: 690
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 2GA0
+  name: Kennedy Intranational Airport
+  lat: 33.526501
+  lon: -83.638
+  elevation_ft: 695
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 47A
+  name: Cherokee County Regional Airport
+  lat: 34.3106
+  lon: -84.423897
+  elevation_ft: 1219
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: GA01
+  name: The Flying W Ranch Airport
+  lat: 34.176624
+  lon: -83.936177
+  elevation_ft: 1160
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 02GE
+  name: Etowah Fields Airport
+  lat: 34.175301
+  lon: -84.9244
+  elevation_ft: 710
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 4GA9
+  name: Ebeneezer Airport
+  lat: 34.242298
+  lon: -84.057098
+  elevation_ft: 1230
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: GA00
+  name: Kintail Farm Airport
+  lat: 33.8256
+  lon: -83.639702
+  elevation_ft: 810
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: OPN
+  name: Thomaston Upson County Airport
+  lat: 32.954601
+  lon: -84.263199
+  elevation_ft: 798
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 4A4
+  name: Polk County Airport- Cornelius Moore Field
+  lat: 34.0187
+  lon: -85.1465
+  elevation_ft: 974
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: GA86
+  name: Little Tobesofkee Creek Ranch Airport
+  lat: 32.983898
+  lon: -84.095596
+  elevation_ft: 755
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: WDR
+  name: Barrow County Airport
+  lat: 33.982899
+  lon: -83.667397
+  elevation_ft: 943
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: GA16
+  name: Taylor Field
+  lat: 33.7243
+  lon: -83.566803
+  elevation_ft: 710
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 8GA7
+  name: Etowah Bend Gliderport
+  lat: 34.202
+  lon: -84.977203
+  elevation_ft: 620
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 1GE3
+  name: Answered Prayer Airport
+  lat: 33.254232
+  lon: -85.170623
+  elevation_ft: 890
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 67GA
+  name: Apalachee Bluff Airpark
+  lat: 33.859299
+  lon: -83.5877
+  elevation_ft: 735
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: US-8910
+  name: Karlovich Airport
+  lat: 34.21656
+  lon: -84.9784
+  elevation_ft: 647
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 5A9
+  name: Roosevelt Memorial Airport
+  lat: 32.937904
+  lon: -84.696467
+  elevation_ft: 880
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 64GE
+  name: WCC Airport
+  lat: 33.726925
+  lon: -85.311891
+  elevation_ft: 956
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: GA44
+  name: Richards Airport
+  lat: 33.081113
+  lon: -85.018559
+  elevation_ft: 650
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: GA50
+  name: Dream Team Airport
+  lat: 33.59682
+  lon: -83.519469
+  elevation_ft: 604
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 85GA
+  name: Aiken Field
+  lat: 34.172298
+  lon: -83.731003
+  elevation_ft: 1020
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 0GA4
+  name: Paradise Falls Airport
+  lat: 33.812901
+  lon: -83.505699
+  elevation_ft: 736
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 5GA7
+  name: Panacea Airport
+  lat: 33.201152
+  lon: -85.229037
+  elevation_ft: 800
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 1GE2
+  name: C & W Air Park
+  lat: 32.844398
+  lon: -84.5439
+  elevation_ft: 1306
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: GE35
+  name: Southern Oaks Airport
+  lat: 33.731389
+  lon: -83.469722
+  elevation_ft: 121
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: GVL
+  name: Lee Gilmer Memorial Airport
+  lat: 34.272598
+  lon: -83.8302
+  elevation_ft: 1276
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 52A
+  name: Madison Municipal Airport
+  lat: 33.612099
+  lon: -83.460403
+  elevation_ft: 694
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 6GE2
+  name: Rainbow Field
+  lat: 32.832802
+  lon: -84.537804
+  elevation_ft: 780
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: JZP
+  name: Pickens County Airport
+  lat: 34.4534
+  lon: -84.457397
+  elevation_ft: 1535
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: LGC
+  name: LaGrange Callaway Airport
+  lat: 33.008873
+  lon: -85.074331
+  elevation_ft: 693
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 1GE7
+  name: Hay Field
+  lat: 33.5172
+  lon: -83.439697
+  elevation_ft: 650
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 6AL0
+  name: Flying Tigers Winery & Resort Airport
+  lat: 33.627222
+  lon: -85.429623
+  elevation_ft: 883
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 09GE
+  name: Elliott Field
+  lat: 34.459
+  lon: -84.181297
+  elevation_ft: 1500
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: GA98
+  name: Grayhill Airport
+  lat: 32.948902
+  lon: -85.050529
+  elevation_ft: 750
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 53GA
+  name: Dawson Field
+  lat: 34.167801
+  lon: -85.258598
+  elevation_ft: 675
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: PIM
+  name: Harris County Airport
+  lat: 32.840698
+  lon: -84.882401
+  elevation_ft: 902
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 97GA
+  name: B Tree Farms Airport
+  lat: 34.2682
+  lon: -83.672096
+  elevation_ft: 1000
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 2GA8
+  name: Shannon Flight Strip
+  lat: 34.3498
+  lon: -85.076897
+  elevation_ft: 677
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: GA65
+  name: Home Field
+  lat: 33.607911
+  lon: -83.355257
+  elevation_ft: 488
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: JCA
+  name: Jackson County Airport
+  lat: 34.174
+  lon: -83.560699
+  elevation_ft: 951
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 3GA1
+  name: Prattsburg Airport
+  lat: 32.728242
+  lon: -84.356875
+  elevation_ft: 554
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: CZL
+  name: Tom B. David Field
+  lat: 34.455399
+  lon: -84.939201
+  elevation_ft: 647
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: GE61
+  name: Brownstone Airpark
+  lat: 34.102514
+  lon: -85.383909
+  elevation_ft: 752
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: RMG
+  name: Richard B Russell Airport
+  lat: 34.350601
+  lon: -85.157997
+  elevation_ft: 644
+  arrival_radius_nm: 25
+  departure_radius_nm: 15
+  ground_radius_nm: 4
+  terminal_radius_nm: 35
+- id: 7A5
+  name: Roanoke Municipal Airport
+  lat: 33.129608
+  lon: -85.372066
+  elevation_ft: 907
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 88GA
+  name: Epic Field
+  lat: 32.752292
+  lon: -84.801902
+  elevation_ft: 774
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 22GA
+  name: Riverside Airport
+  lat: 34.429298
+  lon: -85.054398
+  elevation_ft: 620
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 1GE9
+  name: Waverly Landing Airport
+  lat: 32.714401
+  lon: -84.718102
+  elevation_ft: 675
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: AHN
+  name: Athens Ben Epps Airport
+  lat: 33.948842
+  lon: -83.325634
+  elevation_ft: 808
+  arrival_radius_nm: 25
+  departure_radius_nm: 15
+  ground_radius_nm: 4
+  terminal_radius_nm: 35
+- id: GA09
+  name: Fly-N-S Ranch Airport
+  lat: 34.451698
+  lon: -83.788597
+  elevation_ft: 1330
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: GE56
+  name: Smith Field
+  lat: 33.675944
+  lon: -83.261425
+  elevation_ft: 511
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 32GA
+  name: Sebastian Cove Airport
+  lat: 33.454201
+  lon: -83.277802
+  elevation_ft: 490
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 0GA9
+  name: Roberta Industrial Park Airport
+  lat: 32.713902
+  lon: -84.027496
+  elevation_ft: 505
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 49A
+  name: Gilmer County Airport
+  lat: 34.627899
+  lon: -84.524902
+  elevation_ft: 1486
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 9A0
+  name: Lumpkin County Wimpys Airport
+  lat: 34.582838
+  lon: -84.019918
+  elevation_ft: 1311
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 02GA
+  name: Doug Bolton Field
+  lat: 34.202599
+  lon: -83.429001
+  elevation_ft: 884
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 9GA6
+  name: Brookline - Meadowmere Airport
+  lat: 33.099829
+  lon: -83.404784
+  elevation_ft: 500
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 9GA9
+  name: Deerfield Landing Airport
+  lat: 33.218102
+  lon: -83.3172
+  elevation_ft: 445
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 60GE
+  name: Flying B Farm Airport
+  lat: 33.943667
+  lon: -83.237069
+  elevation_ft: 776
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 21GE
+  name: Deer Crossing Airport
+  lat: 34.549702
+  lon: -83.822197
+  elevation_ft: 1390
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 26GA
+  name: Little Airport
+  lat: 34.402607
+  lon: -85.286744
+  elevation_ft: 776
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: AL27
+  name: Headquarters Airport
+  lat: 34.105701
+  lon: -85.565804
+  elevation_ft: 610
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 7A3
+  name: Lanett Municipal Airport
+  lat: 32.811847
+  lon: -85.229477
+  elevation_ft: 624
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: GE25
+  name: Hutto Farm Airport
+  lat: 32.681106
+  lon: -83.856109
+  elevation_ft: 620
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: GE04
+  name: Mclendon Field
+  lat: 32.666944
+  lon: -84.965556
+  elevation_ft: 650
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: CPP
+  name: Greene County Regional Airport
+  lat: 33.598008
+  lon: -83.138158
+  elevation_ft: 677
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: PYP
+  name: Centre-Piedmont-Cherokee County Regional Airport
+  lat: 34.089977
+  lon: -85.610069
+  elevation_ft: 596
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 6A1
+  name: Butler Municipal Airport
+  lat: 32.569492
+  lon: -84.245194
+  elevation_ft: 667
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: US-0064
+  name: Hickory Grove STOLport
+  lat: 33.901699
+  lon: -85.702797
+  elevation_ft: 700
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: MAC
+  name: Macon Downtown Airport
+  lat: 32.822102
+  lon: -83.561996
+  elevation_ft: 437
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 0GE5
+  name: Mountain Airpark
+  lat: 34.561798
+  lon: -83.713501
+  elevation_ft: 1438
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: MLJ
+  name: Baldwin County Regional Airport
+  lat: 33.154202
+  lon: -83.240701
+  elevation_ft: 385
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: US-12883
+  name: Allred
+  lat: 34.13686
+  lon: -85.6224
+  elevation_ft: 0
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 47GE
+  name: Flylander Farm Airport
+  lat: 34.482168
+  lon: -85.304374
+  elevation_ft: 748
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: GA87
+  name: High Valley Airpark
+  lat: 34.698101
+  lon: -84.012703
+  elevation_ft: 2800
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: AJR
+  name: Habersham County Airport
+  lat: 34.499901
+  lon: -83.556702
+  elevation_ft: 1448
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 3AL5
+  name: Edwards Farm Airport
+  lat: 33.8353
+  lon: -85.763901
+  elevation_ft: 750
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 33GA
+  name: Hudson River Landing Airport
+  lat: 34.259998
+  lon: -83.286697
+  elevation_ft: 665
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: DNN
+  name: Dalton Municipal Airport
+  lat: 34.7229
+  lon: -84.870201
+  elevation_ft: 709
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: MCN
+  name: Middle Georgia Regional Airport
+  lat: 32.692799
+  lon: -83.6492
+  elevation_ft: 354
+  arrival_radius_nm: 25
+  departure_radius_nm: 15
+  ground_radius_nm: 4
+  terminal_radius_nm: 35
+- id: US-0023
+  name: Webb & Shepard Farm Airport
+  lat: 32.561798
+  lon: -83.939903
+  elevation_ft: 561
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 30GE
+  name: Papas Place Airport
+  lat: 34.194029
+  lon: -83.194601
+  elevation_ft: 720
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: GE27
+  name: Smith Field
+  lat: 32.6022
+  lon: -83.754204
+  elevation_ft: 475
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 31GE
+  name: Tailwind Ranch Airport
+  lat: 32.81924
+  lon: -83.407809
+  elevation_ft: 392
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: ANB
+  name: Anniston Regional Airport
+  lat: 33.5882
+  lon: -85.8581
+  elevation_ft: 612
+  arrival_radius_nm: 25
+  departure_radius_nm: 15
+  ground_radius_nm: 4
+  terminal_radius_nm: 35
+- id: 3GA7
+  name: Thomas Ridge Airport
+  lat: 32.450833
+  lon: -84.249181
+  elevation_ft: 515
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: GA81
+  name: Cameron Field
+  lat: 32.549836
+  lon: -83.827425
+  elevation_ft: 380
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: CSG
+  name: Columbus Airport
+  lat: 32.516415
+  lon: -84.939602
+  elevation_ft: 397
+  arrival_radius_nm: 25
+  departure_radius_nm: 15
+  ground_radius_nm: 4
+  terminal_radius_nm: 35
+- id: 26A
+  name: Ashland/Lineville Airport
+  lat: 33.284207
+  lon: -85.80863
+  elevation_ft: 1065
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: AL89
+  name: Sommerset Strip
+  lat: 32.7187
+  lon: -85.366898
+  elevation_ft: 820
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 1GE4
+  name: Beckley Farms Airport
+  lat: 32.501099
+  lon: -83.933296
+  elevation_ft: 425
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: GA99
+  name: Miami Valley Farm Airport
+  lat: 32.547414
+  lon: -83.801177
+  elevation_ft: 468
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: GE72
+  name: Hannah Creek Airport
+  lat: 34.235313
+  lon: -83.153018
+  elevation_ft: 728
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: AL32
+  name: Flying BK Ranch Airport
+  lat: 34.322601
+  lon: -85.6437
+  elevation_ft: 670
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: WRB
+  name: Robins Air Force Base
+  lat: 32.640099
+  lon: -83.591904
+  elevation_ft: 294
+  arrival_radius_nm: 25
+  departure_radius_nm: 15
+  ground_radius_nm: 4
+  terminal_radius_nm: 35
+- id: 57GA
+  name: Blue Ridge Skyport Airport
+  lat: 34.863098
+  lon: -84.393799
+  elevation_ft: 1946
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 5GE1
+  name: Peachtree Landings Airport
+  lat: 32.570301
+  lon: -83.721901
+  elevation_ft: 447
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: GA23
+  name: Wyatt Airport
+  lat: 34.5783
+  lon: -85.383904
+  elevation_ft: 720
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: GE05
+  name: Gibson Field
+  lat: 34.615601
+  lon: -85.343102
+  elevation_ft: 750
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 4GA4
+  name: R.M. Harris Airport
+  lat: 34.846699
+  lon: -84.7547
+  elevation_ft: 770
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 5A2
+  name: Warner Robins Air Park
+  lat: 32.559299
+  lon: -83.674896
+  elevation_ft: 409
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: PXE
+  name: Perry Houston County Airport
+  lat: 32.510601
+  lon: -83.767303
+  elevation_ft: 418
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: DZJ
+  name: Blairsville Airport
+  lat: 34.855099
+  lon: -83.996902
+  elevation_ft: 1911
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 9A5
+  name: Barwick Lafayette Airport
+  lat: 34.688599
+  lon: -85.290398
+  elevation_ft: 777
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 2AL5
+  name: Flying J Ranch Airport
+  lat: 34.392799
+  lon: -85.665001
+  elevation_ft: 1430
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: GA45
+  name: Arrendale Forest Strip
+  lat: 34.660155
+  lon: -83.502724
+  elevation_ft: 0
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 18A
+  name: Franklin County Airport
+  lat: 34.340099
+  lon: -83.133499
+  elevation_ft: 890
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 3GE3
+  name: Broad River Air Park
+  lat: 34.41235
+  lon: -83.18061
+  elevation_ft: 690
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: GE11
+  name: Hogjowl Airport
+  lat: 34.605801
+  lon: -85.461899
+  elevation_ft: 1790
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 37GA
+  name: Blue Bird Field
+  lat: 34.900398
+  lon: -84.778503
+  elevation_ft: 800
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: GA72
+  name: Pratermill Flight Park Airport
+  lat: 34.881699
+  lon: -84.889702
+  elevation_ft: 780
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 7GA5
+  name: Mount Cove STOLport
+  lat: 34.632301
+  lon: -85.447197
+  elevation_ft: 1000
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: AL09
+  name: Cloudmont Airpark
+  lat: 34.533401
+  lon: -85.590202
+  elevation_ft: 1692
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: US-8553
+  name: Houston Crop Service Airport
+  lat: 32.43446
+  lon: -83.79073
+  elevation_ft: 390
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: GA67
+  name: King Sky Ranch Airport
+  lat: 34.7682
+  lon: -83.592903
+  elevation_ft: 1840
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: AUO
+  name: Auburn University Regional Airport
+  lat: 32.615101
+  lon: -85.433998
+  elevation_ft: 777
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 86GA
+  name: Flying G Ranch Airport
+  lat: 34.867901
+  lon: -85.061096
+  elevation_ft: 845
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: TOC
+  name: Toccoa Airport - R.G. Letourneau Field
+  lat: 34.5938
+  lon: -83.295799
+  elevation_ft: 996
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: IIY
+  name: Washington Wilkes County Airport
+  lat: 33.7794
+  lon: -82.815804
+  elevation_ft: 646
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 2GE7
+  name: Petty Farms Airport
+  lat: 34.958099
+  lon: -84.779198
+  elevation_ft: 760
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: ASN
+  name: Talladega Municipal Airport
+  lat: 33.569901
+  lon: -86.050903
+  elevation_ft: 529
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 4A9
+  name: Isbell Field
+  lat: 34.473701
+  lon: -85.721397
+  elevation_ft: 877
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 82A
+  name: Marion County Airport
+  lat: 32.282398
+  lon: -84.503502
+  elevation_ft: 682
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 55GE
+  name: Rostex Airport
+  lat: 34.979764
+  lon: -84.741926
+  elevation_ft: 887
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 1A3
+  name: Martin Campbell Field
+  lat: 35.016201
+  lon: -84.346298
+  elevation_ft: 1790
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 53A
+  name: Dr. C P Savage Sr. Airport
+  lat: 32.301998
+  lon: -84.0075
+  elevation_ft: 337
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: GA03
+  name: Wilson Airport
+  lat: 34.869499
+  lon: -85.199699
+  elevation_ft: 795
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: LSF
+  name: Lawson Army Air Field
+  lat: 32.332546
+  lon: -84.988003
+  elevation_ft: 232
+  arrival_radius_nm: 25
+  departure_radius_nm: 15
+  ground_radius_nm: 4
+  terminal_radius_nm: 35
+- id: US-7469
+  name: Browder Airport
+  lat: 35.01713
+  lon: -84.73159
+  elevation_ft: 0
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 2AL8
+  name: Finkley Farm Airport
+  lat: 32.421101
+  lon: -85.2481
+  elevation_ft: 413
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: GA77
+  name: Twin Forks Airport
+  lat: 34.872083
+  lon: -85.250361
+  elevation_ft: 780
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: EBA
+  name: Elbert County Airport Patz Field
+  lat: 34.095423
+  lon: -82.817581
+  elevation_ft: 603
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: GAD
+  name: Northeast Alabama Regional Airport
+  lat: 33.972599
+  lon: -86.088996
+  elevation_ft: 569
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: AL51
+  name: Flying C's Plantation Airport
+  lat: 32.4161
+  lon: -85.299202
+  elevation_ft: 395
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 3GE4
+  name: Fox Mountain Airport
+  lat: 34.73
+  lon: -85.541901
+  elevation_ft: 925
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: US-7465
+  name: Dekker Landing Field
+  lat: 32.28008
+  lon: -84.94653
+  elevation_ft: 0
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 0GA2
+  name: Airnautique, Inc. Airport
+  lat: 34.377899
+  lon: -82.945702
+  elevation_ft: 720
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 7GA4
+  name: Danville Airpark
+  lat: 32.581001
+  lon: -83.2677
+  elevation_ft: 459
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: US-7466
+  name: Fryar Field
+  lat: 32.27308
+  lon: -84.95726
+  elevation_ft: 0
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: GA18
+  name: Big Creek Flying Ranch Airport
+  lat: 34.832381
+  lon: -83.409226
+  elevation_ft: 1650
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 1SC3
+  name: STOL-It Farm Airport
+  lat: 34.55189
+  lon: -83.04187
+  elevation_ft: 890
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 8AL3
+  name: Fricks Field Airport
+  lat: 34.141767
+  lon: -86.088567
+  elevation_ft: 0
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: ALX
+  name: Thomas C Russell Field
+  lat: 32.9147
+  lon: -85.962997
+  elevation_ft: 686
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 94GA
+  name: Snow Hill Airstrip
+  lat: 32.262901
+  lon: -83.787102
+  elevation_ft: 465
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: FGU
+  name: Collegedale Municipal Airport
+  lat: 35.044315
+  lon: -85.020146
+  elevation_ft: 860
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 3GA3
+  name: Warren Field
+  lat: 34.871111
+  lon: -85.4375
+  elevation_ft: 1866
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: OKZ
+  name: Kaolin Field
+  lat: 32.966702
+  lon: -82.838203
+  elevation_ft: 438
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: AL60
+  name: Dugger's Field
+  lat: 33.838699
+  lon: -86.211403
+  elevation_ft: 560
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 47GA
+  name: Everidge Airport
+  lat: 32.220674
+  lon: -83.855909
+  elevation_ft: 450
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: GE99
+  name: Heaven's Landing Airport
+  lat: 34.914398
+  lon: -83.459702
+  elevation_ft: 2724
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 27AL
+  name: Little Texas Airport
+  lat: 32.453499
+  lon: -85.558197
+  elevation_ft: 500
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 4AL7
+  name: Leon's Landing Airport
+  lat: 34.744701
+  lon: -85.689796
+  elevation_ft: 1430
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: PLR
+  name: St Clair County Airport
+  lat: 33.5588
+  lon: -86.2491
+  elevation_ft: 485
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 0GA1
+  name: Mustang Field
+  lat: 34.477901
+  lon: -82.897102
+  elevation_ft: 693
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: GA17
+  name: Flint River Nursery Airport
+  lat: 32.1688
+  lon: -83.973503
+  elevation_ft: 320
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 0GE3
+  name: Lookout Mountain Airport
+  lat: 34.904701
+  lon: -85.459702
+  elevation_ft: 563
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: CHA
+  name: Chattanooga Metropolitan Airport (Lovell Field)
+  lat: 35.035301
+  lon: -85.203796
+  elevation_ft: 683
+  arrival_radius_nm: 25
+  departure_radius_nm: 15
+  ground_radius_nm: 4
+  terminal_radius_nm: 35
+- id: 4GA0
+  name: Hodges Field Airport
+  lat: 32.123486
+  lon: -84.129967
+  elevation_ft: 455
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: SC96
+  name: Tokeena Air Park
+  lat: 34.560299
+  lon: -82.935303
+  elevation_ft: 800
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: ACJ
+  name: Jimmy Carter Regional Airport
+  lat: 32.110802
+  lon: -84.188904
+  elevation_ft: 468
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: AL71
+  name: Willow Point Airport
+  lat: 32.803699
+  lon: -85.980499
+  elevation_ft: 551
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 4GE3
+  name: Whitehall Airport
+  lat: 32.4994
+  lon: -83.182917
+  elevation_ft: 350
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 4GA5
+  name: Peterson Field
+  lat: 32.088698
+  lon: -84.372498
+  elevation_ft: 526
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: NC08
+  name: Tusquittee Landing Airport
+  lat: 35.0854
+  lon: -83.736298
+  elevation_ft: 2000
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 8AL2
+  name: Charles C Killough Field
+  lat: 33.355426
+  lon: -86.262135
+  elevation_ft: 443
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 5GA6
+  name: Roney Farms Airport
+  lat: 32.149899
+  lon: -83.861298
+  elevation_ft: 352
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 48A
+  name: Cochran Airport
+  lat: 32.399399
+  lon: -83.275902
+  elevation_ft: 377
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 06A
+  name: Moton Field Municipal Airport
+  lat: 32.460499
+  lon: -85.680002
+  elevation_ft: 264
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 7AL2
+  name: Peterson Field
+  lat: 33.86482
+  lon: -86.310835
+  elevation_ft: 600
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 9GA5
+  name: Lowell Field
+  lat: 32.058201
+  lon: -84.290199
+  elevation_ft: 475
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 05GA
+  name: Raju Airport
+  lat: 32.0714
+  lon: -84.714401
+  elevation_ft: 625
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: SC34
+  name: Iva Field
+  lat: 34.2971
+  lon: -82.683701
+  elevation_ft: 660
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 51A
+  name: Hawkinsville Pulaski County Airport
+  lat: 32.283676
+  lon: -83.438164
+  elevation_ft: 270
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 92A
+  name: Chilhowee Gliderport
+  lat: 35.226501
+  lon: -84.5849
+  elevation_ft: 770
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 9GA8
+  name: Chinaberry Ranch Airport
+  lat: 32.6936
+  lon: -82.898903
+  elevation_ft: 295
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: CHAN
+  name: A & C AG Aviation Inc
+  lat: 32.171115
+  lon: -83.692893
+  elevation_ft: 0
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: HQU
+  name: Thomson-McDuffie County Airport
+  lat: 33.529701
+  lon: -82.516502
+  elevation_ft: 501
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: RZR
+  name: Cleveland Regional Jetport
+  lat: 35.211497
+  lon: -84.799769
+  elevation_ft: 860
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 63GE
+  name: Westbrook Airport
+  lat: 32.047358
+  lon: -84.740064
+  elevation_ft: 550
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: DBN
+  name: W H 'Bud' Barron Airport
+  lat: 32.5644
+  lon: -82.985298
+  elevation_ft: 309
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: SC24
+  name: Eagle Ridge Airport
+  lat: 34.6717
+  lon: -82.913597
+  elevation_ft: 850
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: RHP
+  name: Western Carolina Regional Airport
+  lat: 35.195202
+  lon: -83.862999
+  elevation_ft: 1697
+  arrival_radius_nm: 25
+  departure_radius_nm: 15
+  ground_radius_nm: 4
+  terminal_radius_nm: 35
+- id: BFZ
+  name: Albertville Regional Airport/Thomas J Brumlik Field
+  lat: 34.229099
+  lon: -86.255798
+  elevation_ft: 1032
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 74TN
+  name: Hog Lot Landing
+  lat: 35.139221
+  lon: -85.212107
+  elevation_ft: 670
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 3GE8
+  name: Prater Ranch Airport
+  lat: 33.843616
+  lon: -82.478807
+  elevation_ft: 460
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: SCD
+  name: Merkel Field Sylacauga Municipal Airport
+  lat: 33.171799
+  lon: -86.305496
+  elevation_ft: 569
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 2AL4
+  name: Tranquility Base Airport
+  lat: 33.712447
+  lon: -86.395595
+  elevation_ft: 658
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: CEU
+  name: Oconee County Regional Airport
+  lat: 34.671902
+  lon: -82.886498
+  elevation_ft: 892
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 6AL3
+  name: Lay Landing
+  lat: 33.379148
+  lon: -86.377239
+  elevation_ft: 443
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: US-6988
+  name: New Prater Ranch Airport
+  lat: 33.86813
+  lon: -82.46076
+  elevation_ft: 459
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: 20A
+  name: Robbins Field
+  lat: 33.971183
+  lon: -86.380518
+  elevation_ft: 1140
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: AND
+  name: Anderson Regional Airport
+  lat: 34.494598
+  lon: -82.709396
+  elevation_ft: 782
+  arrival_radius_nm: 25
+  departure_radius_nm: 15
+  ground_radius_nm: 4
+  terminal_radius_nm: 35
+- id: 3AL6
+  name: Town & Country Airpark
+  lat: 33.490101
+  lon: -86.412498
+  elevation_ft: 730
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+- id: SC26
+  name: Hawks Nest Farm Airport
+  lat: 34.808102
+  lon: -82.998596
+  elevation_ft: 1050
+  arrival_radius_nm: 12
+  departure_radius_nm: 8
+  ground_radius_nm: 2
+  terminal_radius_nm: 15
+phase_classifier:
+  focus: primary_arrival_departure
+  min_phase_confidence: 0.55
+  relevant_phases:
+  - INITIAL_APPROACH
+  - INTERMEDIATE_APPROACH
+  - FINAL_APPROACH
+  - DEPARTURE
+  - ENROUTE_CLIMB
+  thresholds:
+    outer_arrival:
+      max_speed_kt: 452.449
+      min_altitude_agl_ft: 6563.286
+    focused_terminal_arrival:
+      max_distance_airport_nm: 55.281
+      max_end_altitude_agl_ft: 13249.0
+      max_mean_altitude_agl_ft: 14043.097
+      max_delta_altitude_ft: -625.0
+      max_vertical_rate_fpm: -744.727
+      min_speed_kt: 165.217
+      max_speed_kt: 372.571
+    final_arrival:
+      max_distance_airport_nm: 19.32
+      max_end_altitude_agl_ft: 1899.0
+      max_mean_altitude_agl_ft: 2124.0
+      min_speed_kt: 81.829
+      max_speed_kt: 198.64
+    departure:
+      min_delta_altitude_ft: 1275.0
+      min_vertical_rate_fpm: 1418.667
+      max_start_altitude_agl_ft: 4849.0
+      min_speed_kt: 155.775
+    enroute_climb:
+      min_delta_altitude_ft: 950.0
+      min_vertical_rate_fpm: 1176.0
+      min_speed_kt: 243.38
+      min_mean_altitude_agl_ft: 7239.466
+      max_mean_altitude_agl_ft: 26528.167
+      min_start_altitude_agl_ft: 6124.0
+context:
+  airport_scope: primary_only
+dbscan:
+  default_eps: 1.0
+  training_phases:
+  - INITIAL_APPROACH
+  - INTERMEDIATE_APPROACH
+  - FINAL_APPROACH
+  - DEPARTURE
+  - ENROUTE_CLIMB
+  training_filter:
+    primary_airport_only: true
+    airport_context_types:
+    - arrival
+    - departure
+    - terminal
+  eps_selection:
+    enabled: true
+    method: kth_neighbor_percentile
+    percentile: 90
+    min_eps: 0.25
+    max_eps: 2.5
+  min_unique_tracks_by_phase:
+    INITIAL_APPROACH: 4
+    INTERMEDIATE_APPROACH: 5
+    FINAL_APPROACH: 5
+    DEPARTURE: 5
+    ENROUTE_CLIMB: 4
+  feature_weights_by_phase:
+    INITIAL_APPROACH:
+      delta_altitude_ft: 1.3
+      mean_vertical_rate_fpm: 1.2
+    INTERMEDIATE_APPROACH:
+      delta_altitude_ft: 1.5
+      mean_vertical_rate_fpm: 1.3
+      mean_ground_speed_kt: 1.0
+      heading_change_deg: 1.2
+      sinuosity: 1.2
+    FINAL_APPROACH:
+      delta_altitude_ft: 1.8
+      mean_vertical_rate_fpm: 1.7
+      max_abs_vertical_rate_fpm: 1.4
+      mean_ground_speed_kt: 1.1
+      heading_change_deg: 1.4
+      sinuosity: 1.3
+    DEPARTURE:
+      delta_altitude_ft: 1.5
+      mean_vertical_rate_fpm: 1.3
+      delta_ground_speed_kt: 1.2
+    ENROUTE_CLIMB:
+      delta_altitude_ft: 1.3
+      mean_vertical_rate_fpm: 1.2
